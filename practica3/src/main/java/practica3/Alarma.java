@@ -1,5 +1,13 @@
 package practica3;
 
-public class Alarma {
+import java.util.Date;
 
+public class Alarma {
+	
+	private String id;
+	private Date hora;
+	
+	public Alarma (String id) {
+		this.id = id;
+	}
 }
