@@ -7,6 +7,8 @@ public class Alarmas {
 	private List<Alarma> alarmasDesactivadas = new LinkedList<Alarma>();
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	
+	private AlarmasEstado state;
+	
 	public Alarma alarma(String id) {
 		return new Alarma(id);
 	}
@@ -26,5 +28,9 @@ public class Alarmas {
 	public void desactivaAlarma(Alarma a) {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
+	}
+	
+	public void setState(AlarmasEstado state) {
+		this.state = state;
 	}
 }
