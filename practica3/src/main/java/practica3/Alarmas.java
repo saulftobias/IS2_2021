@@ -23,7 +23,8 @@ public class Alarmas {
 		return alarmasActivas.peek();
 	}
 	
-	public desactivaAlarma(Alarma a) {
+	public void desactivaAlarma(Alarma a) {
 		alarmasActivas.remove(a);
+		alarmasDesactivadas.add(a);
 	}
 }
