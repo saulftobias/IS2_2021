@@ -1,4 +1,4 @@
-package src.main.java.practica3;
+package practica3;
 
 public class AlarmasEstado {
 
