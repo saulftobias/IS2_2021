@@ -33,7 +33,7 @@ public class Desprogramada extends AlarmasEstado {
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
-		context.alarma(id);
+		context.activaAlarma(context.alarma(id));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);

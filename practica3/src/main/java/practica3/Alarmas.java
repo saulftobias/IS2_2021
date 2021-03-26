@@ -10,7 +10,7 @@ public class Alarmas {
 	private AlarmasEstado state;
 	
 	public Alarma alarma(String id) {
-		return new Alarma(id);
+		return null;
 	}
 	
 	public boolean anhadeAlarma(Alarma a) {
@@ -32,5 +32,21 @@ public class Alarmas {
 	
 	public void setState(AlarmasEstado state) {
 		this.state = state;
+	}
+
+	public void elimimnaAlarma(String id) {
+
+	}
+
+	public void activaAlarma(Alarma alarma) {
+		
+	}
+
+	public void activaMelodia() {
+		
+	}
+
+	public void desactivaMelodia() {
+		
 	}
 }
