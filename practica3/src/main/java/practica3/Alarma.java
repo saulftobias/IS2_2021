@@ -7,7 +7,10 @@ public class Alarma {
 	private String id;
 	private Date hora;
 	
-	public Alarma (String id) {
+	public Alarma (String id, Date hora) {
 		this.id = id;
+		this.hora = hora;
 	}
+	
+	
 }
