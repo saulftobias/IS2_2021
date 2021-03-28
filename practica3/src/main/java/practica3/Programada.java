@@ -51,7 +51,7 @@ public class Programada extends AlarmasEstado {
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
-		context.activaAlarma(context.alarma(id));
+		context.activaAlarma(context.getAlarma(id));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);
@@ -69,7 +69,7 @@ public class Programada extends AlarmasEstado {
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
-		context.desactivaAlarma(context.alarma(id));
+		context.desactivaAlarma(context.getAlarma(id));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);

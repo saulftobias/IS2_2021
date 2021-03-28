@@ -15,7 +15,7 @@ public class Sonando extends AlarmasEstado {
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
-		context.desactivaAlarma(context.alarmaMasProxima()); // TODO: Comprobar si está bien
+		context.desactivaAlarma(context.alarmaMasProxima());
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);

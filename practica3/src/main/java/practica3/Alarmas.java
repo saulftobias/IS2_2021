@@ -8,11 +8,10 @@ public class Alarmas {
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	private List<Alarma> alarmas = new ArrayList<Alarma>();
 
-	@SuppressWarnings("unused")
 	private AlarmasEstado state;
+	
 	public Alarmas() { 
-		//TODO Implementar metodo init en la calse AlarmasEstado
-		state = AlarmasEstado.init(this);
+		state = state.init(this);
 	}
 
 	public Alarma getAlarma(String id) {
@@ -68,6 +67,7 @@ public class Alarmas {
 		alarma.desactiva();
 	}
 	
+	// Signals
 	public void nuevaAlarma(Alarma alarma) {
 		state.nuevaAlarma(this, alarma.getId(), alarma.getHora());
 	}
