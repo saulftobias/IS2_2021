@@ -21,6 +21,16 @@ public abstract class AlarmasEstado {
 	public static AlarmasEstado getSonando() {
 		return sonando;
 	};
+	
+	public AlarmasEstado init(Alarmas context) {
+		
+		// Obtengo el que es el estado inicial
+		AlarmasEstado estadoInit = getDesprogramada();
+		
+		// Pongo el estado inicial a desprogramada y lo devuelvo
+		context.setState(estadoInit);
+		return estadoInit;
+	}
 
 	// Métodos de las señales
 	public void nuevaAlarma(Alarmas context, String id, Date hora) {}
