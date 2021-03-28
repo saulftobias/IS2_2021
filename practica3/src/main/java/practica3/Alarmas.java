@@ -11,7 +11,7 @@ public class Alarmas {
 	private AlarmasEstado state;
 	
 	public Alarmas() { 
-		state = state.init(this);
+		state = AlarmasEstado.init(this);
 	}
 
 	public Alarma getAlarma(String id) {

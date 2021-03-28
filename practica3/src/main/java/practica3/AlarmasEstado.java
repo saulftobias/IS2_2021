@@ -9,6 +9,8 @@ public abstract class AlarmasEstado {
 	private static AlarmasEstado desprogramada = new Desprogramada();
 	private static AlarmasEstado sonando = new Sonando();
 	
+	public TimedStateController timedStateController = new TimedStateController();
+	
 	// Getters estáticos de los atributos probados de los objetos de cada estado
 	public static AlarmasEstado getProgramada() {
 		return programada;
@@ -22,7 +24,7 @@ public abstract class AlarmasEstado {
 		return sonando;
 	};
 	
-	public AlarmasEstado init(Alarmas context) {
+	public static AlarmasEstado init(Alarmas context) {
 		
 		// Obtengo el que es el estado inicial
 		AlarmasEstado estadoInit = getDesprogramada();
