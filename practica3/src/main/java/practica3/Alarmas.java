@@ -59,12 +59,14 @@ public class Alarmas {
 		alarmasActivas.add(alarma);
 	}
 
-	public void activaMelodia(Alarma alarma) {
-		alarma.activa();
+	public void activaMelodia() {
 	}
 
-	public void desactivaMelodia(Alarma alarma) {
-		alarma.desactiva();
+	public void desactivaMelodia() {
+	}
+	
+	public int alarmasActivasSize() {
+		return alarmasActivas.size();
 	}
 	
 	// Signals

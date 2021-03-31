@@ -1,7 +1,5 @@
 package practica3;
 
-import java.util.Date;
-
 public class Sonando extends AlarmasEstado {
 	
 	@Override
@@ -11,7 +9,12 @@ public class Sonando extends AlarmasEstado {
 		this.exitAction(context);
 
 		// Almaceno el valor del próximo estado y le actualizo
-		AlarmasEstado estadoDestino = getProgramada();
+		AlarmasEstado estadoDestino;
+		if (context.alarmasActivasSize() != 0) {
+			estadoDestino = getProgramada();
+		} else {
+			estadoDestino = getDesprogramada();
+		}
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
