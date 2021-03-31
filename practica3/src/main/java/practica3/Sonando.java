@@ -27,12 +27,12 @@ public class Sonando extends AlarmasEstado {
 	
 	@Override
 	public void entryAction(Alarmas context) {
-		context.activaMelodia(null);
+		context.activaMelodia();
 	}
 	
 	@Override
 	public void exitAction(Alarmas context) {
-		context.desactivaMelodia(null);
+		context.desactivaMelodia();
 	}
 
 
