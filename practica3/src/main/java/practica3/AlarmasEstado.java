@@ -1,6 +1,7 @@
 package practica3;
 
 import java.util.Date;
+import java.util.Timer;
 
 public abstract class AlarmasEstado {
 
@@ -9,7 +10,8 @@ public abstract class AlarmasEstado {
 	private static AlarmasEstado desprogramada = new Desprogramada();
 	private static AlarmasEstado sonando = new Sonando();
 	
-	public TimedStateController timedStateController = new TimedStateController();
+	// Añadido para gestión del evento temporizado
+	protected Timer timedStateController= new Timer();
 	
 	// Getters estáticos de los atributos probados de los objetos de cada estado
 	public static AlarmasEstado getProgramada() {
