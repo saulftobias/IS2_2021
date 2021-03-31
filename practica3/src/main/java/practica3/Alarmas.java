@@ -70,23 +70,23 @@ public class Alarmas {
 	}
 	
 	// Signals
-	public void nuevaAlarma(Alarma alarma) {
-		state.nuevaAlarma(this, alarma.getId(), alarma.getHora());
+	public void nuevaAlarma(String id, Date hora) {
+		state.nuevaAlarma(this, id, hora);
 	}
 	
-	public void borraAlarma(Alarma alarma) {
-		state.borraAlarma(this, alarma.getId());
+	public void borraAlarma(String id) {
+		state.borraAlarma(this, id);
 	}
 	
 	public void apagar () {
 		state.apagar(this);
 	}
 	
-	public void alarmaOff (Alarma alarma) {
-		state.alarmaOff(this, alarma.getId());
+	public void alarmaOff (String id) {
+		state.alarmaOff(this, id);
 	}
 	
-	public void alarmaOn (Alarma alarma) {
-		state.alarmaOn(this, alarma.getId());
+	public void alarmaOn (String id) {
+		state.alarmaOn(this, id);
 	}
  }
