@@ -11,7 +11,6 @@ public class Alarma implements Comparable<Alarma> {
 	public Alarma (String id, Date hora) {
 		this.id = id;
 		this.hora = hora;
-		this.sonando = false;
 	}
 
 	public String getId() {

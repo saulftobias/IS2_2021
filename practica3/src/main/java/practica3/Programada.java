@@ -1,8 +1,12 @@
 package practica3;
 
 import java.util.Date;
+import java.util.TimerTask;
 
 public class Programada extends AlarmasEstado {
+	
+	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
+	protected SuenaAlarmaTask suenaAlarmaTask;
 	
 	@Override
 	public void nuevaAlarma(Alarmas context, String id, Date hora) {
@@ -94,5 +98,40 @@ public class Programada extends AlarmasEstado {
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);
 		estadoDestino.doAction(context);
+	}
+	
+	@Override
+	public void entryAction(Alarmas context) {
+		// Programa el evento temporizado 
+		suenaAlarmaTask = new SuenaAlarmaTask(context, this);
+		timedStateController.schedule(suenaAlarmaTask, context.alarmaMasProxima().getHora());
+	}
+	
+	private class SuenaAlarmaTask extends TimerTask {
+
+		// Atributos utilizados para tener visibilidad sobre el contexto de la aplicacion
+		private Alarmas context;
+		private AlarmasEstado state;
+
+		public SuenaAlarmaTask(Alarmas context, AlarmasEstado state){
+			this.context = context;
+			this.state = state;
+		}
+
+		public void run() { 
+			
+			// Acción de salida
+			state.exitAction(context);
+
+			// Almaceno el valor del próximo estado y le actualizo
+			AlarmasEstado estadoDestino = getSonando();
+			context.setState(estadoDestino);
+
+			// No hay acciones asociadas a la transiccion
+
+			// Ejecuto las acciones de entrada del próximo estado
+			estadoDestino.entryAction(context);
+			estadoDestino.doAction(context);
+		}
 	}
 }

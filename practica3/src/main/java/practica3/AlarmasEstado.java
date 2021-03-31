@@ -27,7 +27,6 @@ public abstract class AlarmasEstado {
 	};
 	
 	public static AlarmasEstado init(Alarmas context) {
-		
 		// Obtengo el que es el estado inicial
 		AlarmasEstado estadoInit = getDesprogramada();
 		
