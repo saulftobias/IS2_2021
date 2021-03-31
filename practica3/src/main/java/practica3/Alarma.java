@@ -34,7 +34,6 @@ public class Alarma implements Comparable<Alarma> {
 		this.sonando = true;
 	}
 
-	@Override
 	public int compareTo(Alarma o) {
 		return this.hora.compareTo(o.hora);
 	}
