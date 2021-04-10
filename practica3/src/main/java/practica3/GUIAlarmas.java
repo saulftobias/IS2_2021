@@ -3,6 +3,8 @@ package practica3;
 import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
@@ -13,8 +15,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+interface Observer {
+	public void update();
+}
 
-public class GUIAlarmas {
+public class GUIAlarmas implements Observer {
 
 	private JFrame frame;
 	private JTextField textFieldId;
@@ -40,13 +45,13 @@ public class GUIAlarmas {
 	 * Create the application.
 	 */
 	public GUIAlarmas() {
-		initialize();
+		init();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void init() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 645, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -155,5 +160,11 @@ public class GUIAlarmas {
 				listaActivas.addElement(new Alarma(id, hora));
 			}
 		});
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		System.out.println("UPDATE\n");
 	}
 }

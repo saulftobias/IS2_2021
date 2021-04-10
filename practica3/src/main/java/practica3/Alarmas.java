@@ -9,7 +9,9 @@ public class Alarmas {
 	private List<Alarma> alarmas = new ArrayList<Alarma>();
 
 	private AlarmasEstado state;
-	
+
+	private ArrayList observadores = new ArrayList();
+
 	public Alarmas() { 
 		state = AlarmasEstado.init(this);
 	}
@@ -64,29 +66,47 @@ public class Alarmas {
 
 	public void desactivaMelodia() {
 	}
-	
+
 	public int alarmasActivasSize() {
 		return alarmasActivas.size();
 	}
+
+	public void registraObservador (Observer o) {    
+		observadores.add(o);
+		o.update();
+	}
+	public void eliminaObservador (Observer o) { 
+		observadores.remove(o); 
+	}
 	
+	public void actualizaObservadores ()
+	{     
+		Iterator i = observadores.iterator();
+		while(i.hasNext())
+		{
+			Observer o = (Observer) i.next();
+			o.update();
+		}
+	}
+
 	// Signals
 	public void nuevaAlarma(String id, Date hora) {
 		state.nuevaAlarma(this, id, hora);
 	}
-	
+
 	public void borraAlarma(String id) {
 		state.borraAlarma(this, id);
 	}
-	
+
 	public void apagar () {
 		state.apagar(this);
 	}
-	
+
 	public void alarmaOff (String id) {
 		state.alarmaOff(this, id);
 	}
-	
+
 	public void alarmaOn (String id) {
 		state.alarmaOn(this, id);
 	}
- }
+}
