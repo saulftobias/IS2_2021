@@ -4,6 +4,11 @@ import java.util.Date;
 
 public class Alarma implements Comparable<Alarma> {
 
+	@Override
+	public String toString() {
+		return id + "," +  hora;
+	}
+
 	private String id;
 	private Date hora;
 	private boolean sonando;

@@ -18,6 +18,7 @@ public class GUIAlarmas {
 
 	private JFrame frame;
 	private JTextField textFieldId;
+	private Alarmas misAlarmas = new Alarmas();
 
 	/**
 	 * Launch the application.
@@ -132,18 +133,26 @@ public class GUIAlarmas {
 		lblAlarmas.setBounds(66, 46, 235, 100);
 		panel.add(lblAlarmas);
 		
-		JList<Alarma> listListaActivas = new JList<Alarma>();
-		listListaActivas.setBounds(446, 75, 114, 122);
+		final DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
+		JList<Alarma> listListaActivas = new JList<Alarma>(listaActivas);
+		listListaActivas.setBounds(446, 75, 175, 122);
 		panel.add(listListaActivas);
 		
 		final JList<Alarma> listListaNoActivas = new JList<Alarma>();
 		listListaNoActivas.setBounds(446, 237, 114, 122);
 		panel.add(listListaNoActivas);
 		
+		
+		
 		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println((Date)spinner.getValue());				
+				Date hora = (Date)spinner.getValue();	
+				System.out.println(hora);
+				String id = textFieldId.getText();
+				misAlarmas.nuevaAlarma(id, hora);
+
+				listaActivas.addElement(new Alarma(id, hora));
 			}
 		});
 	}
