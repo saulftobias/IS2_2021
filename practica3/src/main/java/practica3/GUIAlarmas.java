@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class VentanaPrincipal {
+public class GUIAlarmas {
 
 	private JFrame frame;
 	private JTextField textFieldId;
@@ -26,7 +26,7 @@ public class VentanaPrincipal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal window = new VentanaPrincipal();
+					GUIAlarmas window = new GUIAlarmas();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class VentanaPrincipal {
 	/**
 	 * Create the application.
 	 */
-	public VentanaPrincipal() {
+	public GUIAlarmas() {
 		initialize();
 	}
 
