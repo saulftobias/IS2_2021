@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+@SuppressWarnings("serial")
 class NuevaAlarmaAction extends AbstractAction {
 	
 	private Alarmas modelo;
@@ -14,7 +15,7 @@ class NuevaAlarmaAction extends AbstractAction {
 	public NuevaAlarmaAction(Alarmas modelo, GUIAlarmas vista) {
 		this.modelo = modelo;
 		this.vista = vista;
-		putValue(Action.NAME, "Anhadimos una Alarma");
+		putValue(Action.NAME, "Añade Alarma");
 		putValue(Action.SHORT_DESCRIPTION, "Anhadimos una nueva alarma a las que teniamos ya creadas");
 	}
 
@@ -26,6 +27,7 @@ class NuevaAlarmaAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class BorraAlarmaAction extends AbstractAction {
 	
 	private Alarmas modelo;
@@ -34,7 +36,7 @@ class BorraAlarmaAction extends AbstractAction {
 	public BorraAlarmaAction(Alarmas modelo, GUIAlarmas vista) {
 		this.modelo = modelo;
 		this.vista = vista;
-		putValue(Action.NAME, "Borramos una Alarma");
+		putValue(Action.NAME, "Borra Alarma");
 		putValue(Action.SHORT_DESCRIPTION, "Borramos una alarma a las que teniamos ya creadas");
 	}
 
@@ -46,6 +48,7 @@ class BorraAlarmaAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class AlarmaOnAction extends AbstractAction {
 	
 	private Alarmas modelo;
@@ -54,7 +57,7 @@ class AlarmaOnAction extends AbstractAction {
 	public AlarmaOnAction(Alarmas modelo, GUIAlarmas vista) {
 		this.modelo = modelo;
 		this.vista = vista;
-		putValue(Action.NAME, "Activamos una Alarma");
+		putValue(Action.NAME, "On");
 		putValue(Action.SHORT_DESCRIPTION, "Activamos una alarma de las que teniamos desactivas");
 	}
 
@@ -65,6 +68,7 @@ class AlarmaOnAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class AlarmaOffAction extends AbstractAction {
 	
 	private Alarmas modelo;
@@ -73,7 +77,7 @@ class AlarmaOffAction extends AbstractAction {
 	public AlarmaOffAction(Alarmas modelo, GUIAlarmas vista) {
 		this.modelo = modelo;
 		this.vista = vista;
-		putValue(Action.NAME, "Desactivamos una Alarma");
+		putValue(Action.NAME, "Off");
 		putValue(Action.SHORT_DESCRIPTION, "Desactivamos una alarma de las que teniamos activas");
 	}
 

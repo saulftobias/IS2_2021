@@ -43,20 +43,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	 * Launch the application.
 	 */
 	
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUIAlarmas window = new GUIAlarmas();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
+
 	/**
 	 * Create the application.
 	 */
@@ -64,6 +51,8 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		misAlarmas = a;
 		misAlarmas.addPropertyChangeListener(this);
 		init();
+		setBounds(0,0,600,600);
+
 	}
 
 	/**
@@ -72,11 +61,10 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private void init() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 645, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		textFieldId = new JTextField();
@@ -205,6 +193,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("Prueba");
 		if (evt.getPropertyName().equals("desactivas")) {
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
 			listaNoActivas.removeAllElements();

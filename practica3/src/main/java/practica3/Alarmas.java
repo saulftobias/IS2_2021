@@ -35,6 +35,8 @@ public class Alarmas {
 		
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		
+		System.out.println("Alarma Añadida: " + a);
+		
 		return ret;
 	}
 
