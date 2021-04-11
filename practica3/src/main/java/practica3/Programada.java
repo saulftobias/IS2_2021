@@ -3,10 +3,22 @@ package practica3;
 import java.util.Date;
 import java.util.TimerTask;
 
+/**
+ * Clase que hereda de la clase abstracta AlarmasEstado y que modela
+ * el comportamiento de las alarmas en respuesta a las distintas señales.
+ * 
+ * Crucial en el desarrollo del patron state.
+ * 
+ * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
+ * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
+ * @version abr-2021
+ */
 public class Programada extends AlarmasEstado {
 	
 	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
 	protected SuenaAlarmaTask suenaAlarmaTask;
+	
+	// Redefinicion de los metodos que provocan una accion en respuesta a una signal
 	
 	@Override
 	public void nuevaAlarma(Alarmas context, String id, Date hora) {
@@ -47,7 +59,7 @@ public class Programada extends AlarmasEstado {
 		context.setState(estadoDestino);
 
 		// Acciones asociadas a la transiccion
-		context.elimimnaAlarma(id);
+		context.eliminaAlarma(context.getAlarma(id));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);

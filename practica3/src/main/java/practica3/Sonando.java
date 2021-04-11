@@ -2,6 +2,16 @@ package practica3;
 
 import java.util.TimerTask;
 
+/**
+ * Clase que hereda de la clase abstracta AlarmasEstado y que modela
+ * el comportamiento de las alarmas en respuesta a las distintas señales.
+ * 
+ * Crucial en el desarrollo del patron state.
+ * 
+ * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
+ * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
+ * @version abr-2021
+ */
 public class Sonando extends AlarmasEstado {
 
 	// Constante que representa el tiempo que estará la alarma "sonando"
@@ -9,6 +19,8 @@ public class Sonando extends AlarmasEstado {
 	
 	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
 	protected ApagaAlarmaTask apagaAlarmaTask;
+	
+	// Redefinicion de los metodos que provocan una accion en respuesta a una signal
 
 	@Override
 	public void apagar(Alarmas context) {

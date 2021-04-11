@@ -2,7 +2,19 @@ package practica3;
 
 import java.util.Date;
 
+/**
+ * Clase que hereda de la clase abstracta AlarmasEstado y que modela
+ * el comportamiento de las alarmas en respuesta a las distintas señales.
+ * 
+ * Crucial en el desarrollo del patron state.
+ * 
+ * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
+ * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
+ * @version abr-2021
+ */
 public class Desprogramada extends AlarmasEstado {
+	
+	// Redefinicion de los metodos que provocan una accion en respuesta a una signal
 
 	@Override
 	public void nuevaAlarma(Alarmas context, String id, Date hora) {
