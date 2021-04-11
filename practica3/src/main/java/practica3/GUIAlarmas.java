@@ -1,6 +1,5 @@
 package practica3;
 
-import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -11,8 +10,6 @@ import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -20,6 +17,7 @@ interface Observer {
 	public void update();
 }
 
+@SuppressWarnings("serial")
 public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 
 	private JFrame frame;
@@ -27,6 +25,9 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private JLabel lblIdAlarma;
 	private JLabel lblHoraAlarma;
 	private JButton btnNuevaAlarma;
+	private JButton btnEliminar;
+	private JButton btnOn;
+	private JButton btnOff;
 	private JButton btnApagar;
 	private JLabel lblAlarmasActivas;
 	private JSpinner spinner;
@@ -34,12 +35,15 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private JList<Alarma>listListaNoActivas;
 	private JList<Alarma> listListaActivas;
 	private DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
+	private DefaultListModel<Alarma> listaNoActivas = new DefaultListModel<Alarma>();
 	
 	private Alarmas misAlarmas = new Alarmas();
 
 	/**
 	 * Launch the application.
 	 */
+	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,7 +56,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the application.
 	 */
@@ -131,11 +135,11 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		lblAlarmasDesactivadas.setBounds(435, 207, 157, 30);
 		panel.add(lblAlarmasDesactivadas);
 		
-		JButton btnOff = new JButton("Off");
+		btnOff = new JButton("Off");
 		btnOff.setBounds(446, 377, 52, 19);
 		panel.add(btnOff);
 		
-		JButton btnOn = new JButton("On");
+		btnOn = new JButton("On");
 		btnOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -143,7 +147,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		btnOn.setBounds(514, 377, 52, 19);
 		panel.add(btnOn);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(446, 407, 120, 19);
 		panel.add(btnEliminar);
 		
@@ -157,7 +161,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		listListaActivas.setBounds(446, 75, 114, 122);
 		panel.add(listListaActivas);
 		
-		listListaNoActivas = new JList<Alarma>();
+		listListaNoActivas = new JList<Alarma>(listaNoActivas);
 		listListaNoActivas.setBounds(446, 237, 114, 122);
 		panel.add(listListaNoActivas);
 	}
@@ -176,7 +180,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		return listListaActivas.getSelectedValue();
 	}
 	
-	public Alarma getDesactivas () {
+	public Alarma getDesactiva () {
 		return listListaNoActivas.getSelectedValue();
 	}
 	
@@ -184,11 +188,27 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		btnNuevaAlarma.setAction(action);
 	}
 	
+	public void setApagarAction(Action action) {
+		btnApagar.setAction(action);
+	}
+	
+	public void setOffAction(Action action) {
+		btnOff.setAction(action);
+	}
+	
+	public void setOnAction(Action action) {
+		btnOn.setAction(action);
+	}
+	
+	public void setEliminarAction(Action action) {
+		btnEliminar.setAction(action);
+	}
+	
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("desactivas")) {
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
-			listaActivas.removeAllElements();
-			listaActivas.addAll(alarmasDesactivadas);
+			listaNoActivas.removeAllElements();
+			listaNoActivas.addAll(alarmasDesactivadas);
 		} else if (evt.getPropertyName().equals("activas")) {
 			LinkedList<Alarma> alarmasActivadas =  (LinkedList<Alarma>) evt.getNewValue();
 			listaActivas.removeAllElements();
