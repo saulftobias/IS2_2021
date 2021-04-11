@@ -94,12 +94,12 @@ public class Alarmas {
 		changeSupport.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
-	public void activaMelodia(Alarma a) {
-		changeSupport.firePropertyChange("sonando", null, a);
+	public void activaMelodia() {
+		changeSupport.firePropertyChange("sonando", null, alarmaMasProxima());
 	}
 
-	public void desactivaMelodia(Alarma a) {
-		changeSupport.firePropertyChange("sonando", a, null);
+	public void desactivaMelodia() {
+		changeSupport.firePropertyChange("sonando", alarmaMasProxima(), null);
 	}
 
 	public int alarmasActivasSize() {

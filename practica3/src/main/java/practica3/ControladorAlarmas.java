@@ -40,7 +40,7 @@ class BorraAlarmaAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO
-		Alarma a = vista.getDesactivas();
+		Alarma a = vista.getDesactiva();
 		
 		modelo.borraAlarma(a.getId());
 	}
@@ -59,8 +59,7 @@ class AlarmaOnAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO
-		Alarma a = vista.getDesactivas();
+		Alarma a = vista.getDesactiva();
 		
 		modelo.alarmaOn(a.getId());;
 	}
@@ -79,7 +78,6 @@ class AlarmaOffAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO
 		Alarma a = vista.getActiva();
 		
 		modelo.alarmaOn(a.getId());;
