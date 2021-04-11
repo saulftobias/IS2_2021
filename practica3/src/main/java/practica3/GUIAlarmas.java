@@ -24,12 +24,6 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 
 	private JFrame frame;
 	private JTextField textFieldId;
-	private JLabel lblIdAlarma;
-	private JLabel lblHoraAlarma;
-	private JButton btnNuevaAlarma;
-	private JButton btnApagar;
-	private JLabel lblAlarmasActivas;
-	private JLabel lblAlarmasDesactivadas;
 	
 	private Alarmas misAlarmas = new Alarmas();
 
@@ -76,12 +70,12 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		panel.add(textFieldId);
 		textFieldId.setColumns(10);
 		
-		lblIdAlarma = new JLabel("Id Alarma");
+		JLabel lblIdAlarma = new JLabel("Id Alarma");
 		lblIdAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIdAlarma.setBounds(66, 205, 66, 19);
 		panel.add(lblIdAlarma);
 		
-		lblHoraAlarma = new JLabel("Hora Alarma");
+		JLabel lblHoraAlarma = new JLabel("Hora Alarma");
 		lblHoraAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblHoraAlarma.setBounds(66, 237, 114, 25);
 		panel.add(lblHoraAlarma);
@@ -106,23 +100,23 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
         spinner.setEditor(editor);
 		panel.add(spinner);
 		
-		btnNuevaAlarma = new JButton("Nueva Alarma");
+		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
 
 		btnNuevaAlarma.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNuevaAlarma.setBounds(66, 283, 235, 30);
 		panel.add(btnNuevaAlarma);
 		
-		btnApagar = new JButton("Apagar");
+		JButton btnApagar = new JButton("Apagar");
 		btnApagar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnApagar.setBounds(66, 335, 235, 30);
 		panel.add(btnApagar);
 		
-		lblAlarmasActivas = new JLabel("Alarmas Activas");
+		JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAlarmasActivas.setBounds(446, 35, 114, 30);
 		panel.add(lblAlarmasActivas);
 		
-		lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
+		JLabel lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
 		lblAlarmasDesactivadas.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAlarmasDesactivadas.setBounds(435, 207, 157, 30);
 		panel.add(lblAlarmasDesactivadas);
