@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
