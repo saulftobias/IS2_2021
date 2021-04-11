@@ -11,13 +11,8 @@ public class Alarmas {
 	private List<Alarma> alarmas = new ArrayList<Alarma>();
 
 	private AlarmasEstado state;
-<<<<<<< HEAD
-	private PropertyChangeSupport changeSupportActivadas = new PropertyChangeSupport(this);
-	private PropertyChangeSupport changeSupportDesactivadas = new PropertyChangeSupport(this);
-	private PropertyChangeSupport changeSupportSonando = new PropertyChangeSupport(this);
-=======
 	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
+
 	
 	public Alarmas() { 
 		state = AlarmasEstado.init(this);
@@ -38,11 +33,7 @@ public class Alarmas {
 		alarmas.add(a);
 		boolean ret = alarmasDesactivadas.add(a);
 		
-<<<<<<< HEAD
-		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-=======
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 		
 		return ret;
 	}
@@ -54,13 +45,8 @@ public class Alarmas {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.remove(a);
 		
-<<<<<<< HEAD
-		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
-=======
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		changeSupport.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 		
 		return alarmas.remove(a);
 	}
@@ -76,13 +62,8 @@ public class Alarmas {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
 		
-<<<<<<< HEAD
-		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
-=======
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		changeSupport.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 	}
 
 	public void setState(AlarmasEstado state) {
@@ -98,13 +79,8 @@ public class Alarmas {
 		alarmasActivas.remove(alarma);
 		alarmas.remove(alarma);
 		
-<<<<<<< HEAD
-		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
-=======
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		changeSupport.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 	}
 
 	public void activaAlarma(Alarma alarma) {
@@ -114,13 +90,8 @@ public class Alarmas {
 		alarmasDesactivadas.remove(alarma);
 		alarmasActivas.add(alarma);
 
-<<<<<<< HEAD
-		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
-=======
 		changeSupport.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		changeSupport.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 	}
 
 	public void activaMelodia(Alarma a) {
@@ -156,23 +127,7 @@ public class Alarmas {
 		state.alarmaOn(this, id);
 	}
 	
-<<<<<<< HEAD
-	public void addPropertyChangeActivasListener (PropertyChangeListener listener) {
-		changeSupportActivadas.addPropertyChangeListener(listener);
-	}
-	
-	public void addPropertyChangeDesactivasListener (PropertyChangeListener listener) {
-		changeSupportDesactivadas.addPropertyChangeListener(listener);
-	}
-	
-	public void addPropertyChangeSonandoListener (PropertyChangeListener listener) {
-		changeSupportSonando.addPropertyChangeListener(listener);
-	}
-=======
 	public void addPropertyChangeListener (PropertyChangeListener listener) {
 		changeSupport.addPropertyChangeListener(listener);
 	}
-	
-
->>>>>>> 420dc2ceb27d9619a6769d4311abc561bc4a76a8
 }
