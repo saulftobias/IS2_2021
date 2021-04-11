@@ -11,8 +11,8 @@ public class Alarmas {
 	private List<Alarma> alarmas = new ArrayList<Alarma>();
 
 	private AlarmasEstado state;
-	private PropertyChangeSupport changeSupportActivados = new PropertyChangeSupport(this);
-	private PropertyChangeSupport changeSupportDesactivados = new PropertyChangeSupport(this);
+	private PropertyChangeSupport changeSupportActivadas = new PropertyChangeSupport(this);
+	private PropertyChangeSupport changeSupportDesactivadas = new PropertyChangeSupport(this);
 	private PropertyChangeSupport changeSupportSonando = new PropertyChangeSupport(this);
 	
 	public Alarmas() { 
@@ -34,7 +34,7 @@ public class Alarmas {
 		alarmas.add(a);
 		boolean ret = alarmasDesactivadas.add(a);
 		
-		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
 		
 		return ret;
 	}
@@ -46,8 +46,8 @@ public class Alarmas {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.remove(a);
 		
-		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
+		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 		
 		return alarmas.remove(a);
 	}
@@ -63,8 +63,8 @@ public class Alarmas {
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
 		
-		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
+		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
 	public void setState(AlarmasEstado state) {
@@ -80,8 +80,8 @@ public class Alarmas {
 		alarmasActivas.remove(alarma);
 		alarmas.remove(alarma);
 		
-		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
+		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
 	public void activaAlarma(Alarma alarma) {
@@ -91,8 +91,8 @@ public class Alarmas {
 		alarmasDesactivadas.remove(alarma);
 		alarmasActivas.add(alarma);
 
-		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
-		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
+		changeSupportDesactivadas.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivadas.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
 	public void activaMelodia(Alarma a) {
@@ -129,11 +129,11 @@ public class Alarmas {
 	}
 	
 	public void addPropertyChangeActivasListener (PropertyChangeListener listener) {
-		changeSupportActivados.addPropertyChangeListener(listener);
+		changeSupportActivadas.addPropertyChangeListener(listener);
 	}
 	
 	public void addPropertyChangeDesactivasListener (PropertyChangeListener listener) {
-		changeSupportDesactivados.addPropertyChangeListener(listener);
+		changeSupportDesactivadas.addPropertyChangeListener(listener);
 	}
 	
 	public void addPropertyChangeSonandoListener (PropertyChangeListener listener) {

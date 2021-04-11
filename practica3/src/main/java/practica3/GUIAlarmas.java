@@ -29,6 +29,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private JButton btnNuevaAlarma;
 	private JButton btnApagar;
 	private JLabel lblAlarmasActivas;
+	private JLabel lblAlarmasDesactivadas;
 	
 	private Alarmas misAlarmas = new Alarmas();
 
@@ -121,10 +122,10 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		lblAlarmasActivas.setBounds(446, 35, 114, 30);
 		panel.add(lblAlarmasActivas);
 		
-		JLabel lblAlarmasActivas_1 = new JLabel("Alarmas Desactivadas");
-		lblAlarmasActivas_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlarmasActivas_1.setBounds(435, 207, 157, 30);
-		panel.add(lblAlarmasActivas_1);
+		lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
+		lblAlarmasDesactivadas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAlarmasDesactivadas.setBounds(435, 207, 157, 30);
+		panel.add(lblAlarmasDesactivadas);
 		
 		JButton btnOff = new JButton("Off");
 		btnOff.setBounds(446, 377, 52, 19);
@@ -174,10 +175,10 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	
 	
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getPropertyName().equals("alarmasDesactivadas")) {
+		if (evt.getPropertyName().equals("desactivas")) {
 			List alarmasDesactivadas = (List) evt.getNewValue();
 			//listListaActivas
-		} else if (evt.getPropertyName().equals("alarmasActivas")) {
+		} else if (evt.getPropertyName().equals("activas")) {
 			List alarmasActivas = (List) evt.getNewValue();
 		}
 	}
