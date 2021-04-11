@@ -3,7 +3,7 @@ package practica3;
 import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Observable;
+import java.util.LinkedList;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
@@ -29,7 +29,11 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private JButton btnNuevaAlarma;
 	private JButton btnApagar;
 	private JLabel lblAlarmasActivas;
+	private JSpinner spinner;
 	private JLabel lblAlarmasDesactivadas;
+	private JList<Alarma>listListaNoActivas;
+	private JList<Alarma> listListaActivas;
+	private DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
 	
 	private Alarmas misAlarmas = new Alarmas();
 
@@ -93,7 +97,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		SpinnerDateModel model = new SpinnerDateModel();
         model.setValue(calendar.getTime());
 
-        final JSpinner spinner = new JSpinner(model);
+        spinner = new JSpinner(model);
         spinner.setFont(new Font("Tahoma", Font.PLAIN, 15));
         spinner.setSize(96, 25);
         spinner.setLocation(205, 236);
@@ -149,37 +153,46 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		lblAlarmas.setBounds(66, 46, 235, 100);
 		panel.add(lblAlarmas);
 		
-		final DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
-		JList<Alarma> listListaActivas = new JList<Alarma>(listaActivas);
-		listListaActivas.setBounds(446, 75, 175, 122);
+		listListaActivas = new JList<Alarma>(listaActivas);
+		listListaActivas.setBounds(446, 75, 114, 122);
 		panel.add(listListaActivas);
 		
-		final JList<Alarma> listListaNoActivas = new JList<Alarma>();
+		listListaNoActivas = new JList<Alarma>();
 		listListaNoActivas.setBounds(446, 237, 114, 122);
 		panel.add(listListaNoActivas);
-		
-		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Date hora = (Date)spinner.getValue();	
-				System.out.println(hora);
-				String id = textFieldId.getText();
-				misAlarmas.nuevaAlarma(id, hora);
-
-				listaActivas.addElement(new Alarma(id, hora));
-			}
-		});
 	}
 	
 	// Poner seters de las actions 
 	
+	public Date getDate () {
+		return (Date) spinner.getValue();
+	}
+	
+	public String getId () {
+		return textFieldId.getText();
+	}
+	
+	public Alarma getActiva () {
+		return listListaActivas.getSelectedValue();
+	}
+	
+	public Alarma getDesactivas () {
+		return listListaNoActivas.getSelectedValue();
+	}
+	
+	public void setNuevaAlarmaAction(Action action) {
+		btnNuevaAlarma.setAction(action);
+	}
 	
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("desactivas")) {
-			List alarmasDesactivadas = (List) evt.getNewValue();
-			//listListaActivas
+			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
+			listaActivas.removeAllElements();
+			listaActivas.addAll(alarmasDesactivadas);
 		} else if (evt.getPropertyName().equals("activas")) {
-			List alarmasActivas = (List) evt.getNewValue();
+			LinkedList<Alarma> alarmasActivadas =  (LinkedList<Alarma>) evt.getNewValue();
+			listaActivas.removeAllElements();
+			listaActivas.addAll(alarmasActivadas);
 		}
 	}
 }
