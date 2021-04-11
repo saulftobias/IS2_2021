@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 interface Observer {
@@ -164,7 +165,11 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	}
 	
 	// Poner seters de las actions
-	public void 
 	
 	
+	public void propertyChange(PropertyChangeEvent evt) {
+		if () {
+			
+		}
+	}
 }
