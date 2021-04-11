@@ -1,5 +1,7 @@
 package practica3;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class Alarmas {
@@ -9,9 +11,10 @@ public class Alarmas {
 	private List<Alarma> alarmas = new ArrayList<Alarma>();
 
 	private AlarmasEstado state;
-
-	private ArrayList observadores = new ArrayList();
-
+	private PropertyChangeSupport changeSupportActivados = new PropertyChangeSupport(this);
+	private PropertyChangeSupport changeSupportDesactivados = new PropertyChangeSupport(this);
+	private PropertyChangeSupport changeSupportSonando = new PropertyChangeSupport(this);
+	
 	public Alarmas() { 
 		state = AlarmasEstado.init(this);
 	}
@@ -26,13 +29,26 @@ public class Alarmas {
 	}
 
 	public boolean anhadeAlarma(Alarma a) {
+		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		
 		alarmas.add(a);
-		return alarmasDesactivadas.add(a);
+		boolean ret = alarmasDesactivadas.add(a);
+		
+		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		
+		return ret;
 	}
 
 	public boolean eliminaAlarma(Alarma a) {
+		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.remove(a);
+		
+		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
+		
 		return alarmas.remove(a);
 	}
 
@@ -41,8 +57,14 @@ public class Alarmas {
 	}
 
 	public void desactivaAlarma(Alarma a) {
+		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		
 		alarmasActivas.remove(a);
 		alarmasDesactivadas.add(a);
+		
+		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
 	public void setState(AlarmasEstado state) {
@@ -50,42 +72,39 @@ public class Alarmas {
 	}
 
 	public void elimimnaAlarma(String id) {
+		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		
 		Alarma alarma = getAlarma(id);
 		alarmasDesactivadas.remove(alarma);
 		alarmasActivas.remove(alarma);
 		alarmas.remove(alarma);
+		
+		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
 	public void activaAlarma(Alarma alarma) {
+		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		
 		alarmasDesactivadas.remove(alarma);
 		alarmasActivas.add(alarma);
+
+		changeSupportDesactivados.firePropertyChange("desactivas", alarmasDesactivadasOld, alarmasDesactivadas);
+		changeSupportActivados.firePropertyChange("activas", alarmasActivasOld, alarmasActivas);
 	}
 
-	public void activaMelodia() {
+	public void activaMelodia(Alarma a) {
+		changeSupportSonando.firePropertyChange("sonando", null, a);
 	}
 
-	public void desactivaMelodia() {
+	public void desactivaMelodia(Alarma a) {
+		changeSupportSonando.firePropertyChange("sonando", a, null);
 	}
 
 	public int alarmasActivasSize() {
 		return alarmasActivas.size();
-	}
-
-	public void registraObservador (Observer o) {    
-		observadores.add(o);
-		o.update();
-	}
-	public void eliminaObservador (Observer o) { 
-		observadores.remove(o); 
-	}
-	
-	public void actualizaObservadores () {     
-		Iterator i = observadores.iterator();
-		while(i.hasNext())
-		{
-			Observer o = (Observer) i.next();
-			o.update();
-		}
 	}
 
 	// Signals
@@ -107,5 +126,17 @@ public class Alarmas {
 
 	public void alarmaOn (String id) {
 		state.alarmaOn(this, id);
+	}
+	
+	public void addPropertyChangeActivasListener (PropertyChangeListener listener) {
+		changeSupportActivados.addPropertyChangeListener(listener);
+	}
+	
+	public void addPropertyChangeDesactivasListener (PropertyChangeListener listener) {
+		changeSupportDesactivados.addPropertyChangeListener(listener);
+	}
+	
+	public void addPropertyChangeSonandoListener (PropertyChangeListener listener) {
+		changeSupportSonando.addPropertyChangeListener(listener);
 	}
 }
