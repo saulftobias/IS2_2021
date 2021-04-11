@@ -79,8 +79,7 @@ public class Alarmas {
 		observadores.remove(o); 
 	}
 	
-	public void actualizaObservadores ()
-	{     
+	public void actualizaObservadores () {     
 		Iterator i = observadores.iterator();
 		while(i.hasNext())
 		{

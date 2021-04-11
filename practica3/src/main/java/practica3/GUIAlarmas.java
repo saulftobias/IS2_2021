@@ -13,12 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
 
 interface Observer {
 	public void update();
 }
 
-public class GUIAlarmas implements Observer {
+public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 
 	private JFrame frame;
 	private JTextField textFieldId;
@@ -43,7 +44,9 @@ public class GUIAlarmas implements Observer {
 	/**
 	 * Create the application.
 	 */
-	public GUIAlarmas() {
+	public GUIAlarmas(Alarmas a) {
+		misAlarmas = a;
+		misAlarmas.addPropertyChangeListener(this);
 		init();
 	}
 
@@ -160,10 +163,9 @@ public class GUIAlarmas implements Observer {
 			}
 		});
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("UPDATE\n");
-	}
+	
+	// Poner seters de las actions
+	public void 
+	
+	
 }
