@@ -40,29 +40,48 @@ class BorraAlarmaAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO
-		String id = vista.getDesactiva();
+		Alarma a = vista.getDesactivas();
 		
-		modelo.borraAlarma(id);
+		modelo.borraAlarma(a.getId());
 	}
 }
 
-
-
-
-
-
-public class ControladorAlarmas {
-
-	Alarmas modelo;
-	GUIAlarmas vista;
+class AlarmaOnAction extends AbstractAction {
 	
-	public ControladorAlarmas(Alarmas modelo, GUIAlarmas vista) {
-		
+	private Alarmas modelo;
+	private GUIAlarmas vista;
+	
+	public AlarmaOnAction(Alarmas modelo, GUIAlarmas vista) {
 		this.modelo = modelo;
 		this.vista = vista;
+		putValue(Action.NAME, "Activamos una Alarma");
+		putValue(Action.SHORT_DESCRIPTION, "Activamos una alarma de las que teniamos desactivas");
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO
+		Alarma a = vista.getDesactivas();
 		
-		this.modelo.registraObservador((Observer) this.vista);
+		modelo.alarmaOn(a.getId());;
+	}
+}
+
+class AlarmaOffAction extends AbstractAction {
 	
+	private Alarmas modelo;
+	private GUIAlarmas vista;
 	
+	public AlarmaOffAction(Alarmas modelo, GUIAlarmas vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+		putValue(Action.NAME, "Desactivamos una Alarma");
+		putValue(Action.SHORT_DESCRIPTION, "Desactivamos una alarma de las que teniamos activas");
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO
+		Alarma a = vista.getActiva();
+		
+		modelo.alarmaOn(a.getId());;
 	}
 }

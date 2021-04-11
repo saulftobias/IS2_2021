@@ -105,6 +105,10 @@ public class Alarmas {
 	public int alarmasActivasSize() {
 		return alarmasActivas.size();
 	}
+	
+	public void addPropertyChangeListener (PropertyChangeListener listener) {
+		changeSupport.addPropertyChangeListener(listener);
+	}
 
 	// Signals
 	public void nuevaAlarma(String id, Date hora) {
@@ -125,9 +129,5 @@ public class Alarmas {
 
 	public void alarmaOn (String id) {
 		state.alarmaOn(this, id);
-	}
-	
-	public void addPropertyChangeListener (PropertyChangeListener listener) {
-		changeSupport.addPropertyChangeListener(listener);
 	}
 }
