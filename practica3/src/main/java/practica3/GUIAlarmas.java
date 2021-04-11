@@ -3,7 +3,6 @@ package practica3;
 import java.awt.EventQueue;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Observable;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
