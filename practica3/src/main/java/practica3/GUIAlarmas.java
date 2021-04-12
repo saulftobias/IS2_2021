@@ -12,6 +12,8 @@ import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class GUIAlarmas extends JFrame implements PropertyChangeListener {
@@ -141,6 +143,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	}
 
 	public Date getDate () {
+		System.out.println(spinner.getValue());
 		return (Date) spinner.getValue();
 	}
 
