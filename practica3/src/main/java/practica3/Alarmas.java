@@ -171,6 +171,7 @@ public class Alarmas {
 	 * a los observadores.
 	 */
 	public void activaMelodia() {
+		System.out.println("ALARMA SONANDO!!!");
 		changeSupport.firePropertyChange("sonando", null, alarmaMasProxima());
 	}
 
@@ -179,7 +180,7 @@ public class Alarmas {
 	 * a los observadores.
 	 */
 	public void desactivaMelodia() {
-		changeSupport.firePropertyChange("sonando", alarmaMasProxima(), null);
+		System.out.println("Alarma deja de sonar");
 	}
 
 	/**

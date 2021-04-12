@@ -21,6 +21,7 @@ public class AlarmasMVC {
 		vista.setEliminarAction(new BorraAlarmaAction(modelo, vista));
 		vista.setOnAction(new AlarmaOnAction(modelo, vista));
 		vista.setOffAction(new AlarmaOffAction(modelo, vista));
+		vista.setApagarAction(new ApagarAction(modelo, vista));
 		vista.setVisible(true);
 	}
 }

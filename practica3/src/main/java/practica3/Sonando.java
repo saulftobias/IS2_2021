@@ -24,6 +24,10 @@ public class Sonando extends AlarmasEstado {
 
 	@Override
 	public void apagar(Alarmas context) {
+		
+		// Si esta signal se ha ejecutado es porque se ha pulsado el boton y hay que cancelar el timer
+		timedStateController.cancel();
+		timedStateController.purge();
 
 		// Acción de salida
 		this.exitAction(context);
@@ -51,13 +55,11 @@ public class Sonando extends AlarmasEstado {
 		apagaAlarmaTask = new ApagaAlarmaTask(context, this); 
 		timedStateController.schedule(apagaAlarmaTask, INTERVALO_SONAR);
 		context.activaMelodia();
-		System.out.println("ALARMA SONANDO!!!");
 	}
 
 	@Override
 	public void exitAction(Alarmas context) {
 		context.desactivaMelodia();
-		System.out.println("Alarma deja de sonar");
 	}
 
 	private class ApagaAlarmaTask extends TimerTask {
@@ -65,7 +67,7 @@ public class Sonando extends AlarmasEstado {
 		// Atributos utilizados para tener visibilidad sobre el contexto de la aplicacion
 		private Alarmas context;
 		private AlarmasEstado state;
-
+		
 		public ApagaAlarmaTask(Alarmas context, AlarmasEstado state){
 			this.context = context;
 			this.state = state;
@@ -77,7 +79,7 @@ public class Sonando extends AlarmasEstado {
 			state.exitAction(context);
 
 			// Acciones asociadas a la transiccion
-			context.eliminaAlarma(context.alarmaMasProxima());
+			context.desactivaAlarma(context.alarmaMasProxima());
 
 			// Almaceno el valor del próximo estado y le actualizo
 			AlarmasEstado estadoDestino;
@@ -91,6 +93,8 @@ public class Sonando extends AlarmasEstado {
 			// Ejecuto las acciones de entrada del próximo estado
 			estadoDestino.entryAction(context);
 			estadoDestino.doAction(context);
+			
+			System.out.println("a");
 		}
 	}
 }

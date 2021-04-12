@@ -161,3 +161,33 @@ class AlarmaOffAction extends AbstractAction {
 		}
 	}
 }
+
+@SuppressWarnings("serial")
+class ApagarAction extends AbstractAction {
+
+	// Referencias al modelo y la vista del patron
+	private Alarmas modelo;
+	private GUIAlarmas vista;
+
+	/**
+	 * Constructor de la clase. Inicializa los atributos de la clase y anhade
+	 * nombbre y descripccion corta a la accion
+	 * @param modelo, Alarmas modelo del patron MVC.
+	 * @param vista, GUIAlarmas vista del patron MVC.
+	 */
+	public ApagarAction(Alarmas modelo, GUIAlarmas vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+		putValue(Action.NAME, "Apagar");
+		putValue(Action.SHORT_DESCRIPTION, "Apagamos una alarma cuando esta sonando");
+	}
+
+	/**
+	 * Metodo que modela las acciones concretas que desencadena la "ejecucion"
+	 * de esta accion.
+	 */
+	public void actionPerformed(ActionEvent e) {
+		
+		modelo.apagar();
+	}
+}
