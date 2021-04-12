@@ -58,6 +58,8 @@ public class BorraAlarmaAction extends AbstractAction {
 			modelo.borraAlarma(a.getId());
 		} catch (NullPointerException ex) {
 			System.out.println("Ninguna alarma seleccionada");
+			Error vent = new Error();
+			vent.setVisible(true);
 		}
 	}
 }
