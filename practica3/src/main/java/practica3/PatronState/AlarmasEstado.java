@@ -18,8 +18,8 @@ import practica3.Modelo.Alarmas;
 public abstract class AlarmasEstado {
 
 	// Atributos de los estados que puede representar esta clase abstracta (patron singleton)
-	private static AlarmasEstado programada = new Programada();
-	private static AlarmasEstado desprogramada = new Desprogramada();
+	private static AlarmasEstado programada = new Programadas();
+	private static AlarmasEstado desprogramada = new Desprogramadas();
 	private static AlarmasEstado sonando = new Sonando();
 	
 	// Añadido para gestión del evento temporizado
