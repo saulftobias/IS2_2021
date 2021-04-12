@@ -172,7 +172,6 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		btnEliminar.setAction(action);
 	}
 
-	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		System.out.println("Prueba");
 		if (evt.getPropertyName().equals("alarmasDesactivadas")) {
