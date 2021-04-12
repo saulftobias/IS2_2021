@@ -177,7 +177,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		if (evt.getPropertyName().equals("alarmasDesactivadas")) {
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
 			listaNoActivas.removeAllElements();
-			//listaNoActivas.addAll(alarmasDesactivadas);
+			listaNoActivas.addElement(alarmasDesactivadas.getLast());
 		} else if (evt.getPropertyName().equals("alarmasActivas")) {
 			LinkedList<Alarma> alarmasActivadas =  (LinkedList<Alarma>) evt.getNewValue();
 			listaActivas.removeAllElements();
