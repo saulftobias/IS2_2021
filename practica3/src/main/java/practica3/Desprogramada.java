@@ -21,6 +21,9 @@ public class Desprogramada extends AlarmasEstado {
 
 		// Acción de salida
 		this.exitAction(context);
+		
+		// Acciones asociadas a la transiccion
+		context.anhadeAlarma(new Alarma(id, hora));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -30,9 +33,6 @@ public class Desprogramada extends AlarmasEstado {
 			estadoDestino = getDesprogramada();
 		}
 		context.setState(estadoDestino);
-
-		// Acciones asociadas a la transiccion
-		context.anhadeAlarma(new Alarma(id, hora));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);
@@ -44,6 +44,9 @@ public class Desprogramada extends AlarmasEstado {
 
 		// Acción de salida
 		this.exitAction(context);
+		
+		// Acciones asociadas a la transiccion
+		context.activaAlarma(context.getAlarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -53,9 +56,6 @@ public class Desprogramada extends AlarmasEstado {
 			estadoDestino = getDesprogramada();
 		}
 		context.setState(estadoDestino);
-
-		// Acciones asociadas a la transiccion
-		context.activaAlarma(context.getAlarma(id));
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);

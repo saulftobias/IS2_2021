@@ -3,6 +3,8 @@ package practica3;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
@@ -11,6 +13,7 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+@SuppressWarnings("serial")
 public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 
 	private JFrame frame;
@@ -172,17 +175,32 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		btnEliminar.setAction(action);
 	}
 
-	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("Prueba");
-		if (evt.getPropertyName().equals("alarmasDesactivadas")) {
+
+		if (evt.getPropertyName().equals("alarmasDesactivadas")) { // Caso de que el atributo que se cambie sean las alarmas Desactivadas
+			
+			// Obtenemos el valor de la nueva lista de alarmas desactivadas
+			@SuppressWarnings("unchecked")
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
+			
+			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaNoActivas.removeAllElements();
-			listaNoActivas.addElement(alarmasDesactivadas.getLast());
-		} else if (evt.getPropertyName().equals("alarmasActivas")) {
-			LinkedList<Alarma> alarmasActivadas =  (LinkedList<Alarma>) evt.getNewValue();
+			
+			for (Alarma a: alarmasDesactivadas) {
+				listaNoActivas.addElement(a);
+			}
+		} else if (evt.getPropertyName().equals("alarmasActivas")) { // Caso de que el atributo que se cambie sean las alarmas Activadas
+			
+			// Obtenemos el valor de la nueva lista de alarmas activas
+			@SuppressWarnings("unchecked")
+			Queue<Alarma> alarmasActivadas =  (PriorityQueue<Alarma>) evt.getNewValue();
+			
+			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaActivas.removeAllElements();
-			//listaActivas.addAll(alarmasActivadas);
+			
+			for (Alarma a: alarmasActivadas) {
+				listaActivas.addElement(a);
+			}
 		}
 	}
 }

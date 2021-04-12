@@ -21,12 +21,12 @@ public class Alarmas {
 	// la aplicacion
 	private List<Alarma> alarmasDesactivadas = new LinkedList<Alarma>();
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
-	private List<Alarma> alarmas = new ArrayList<Alarma>();
+	private List<Alarma> alarmas = new ArrayList<Alarma>(); // TODO: Comprobar para que usamos esto
 
 	// Atributo state que representa el estado del conjunto de TODAS las
 	// alarmas (Patron State)
 	private AlarmasEstado state;
-	
+
 	// Clase utilizada por objetos “beans” para notificarles cambios en los atributos
 	private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -45,19 +45,23 @@ public class Alarmas {
 	 * @return Alarma, la alarma si se encuentra, null si no.
 	 */
 	public Alarma getAlarma(String id) {
-		
+
 		// TODO: Comprobar este metodo con Saul
-		
-		// Creacion de la variable
-		Alarma buscada;
-		
-		for (int i = 0; i < alarmas.size(); i++) {
-			buscada = alarmasDesactivadas.get(i);
-			
+
+		// Recorremos la lista de alarmas Desactivadas
+		for (Alarma a: alarmasDesactivadas) {
+
 			// Si la encuentro la devuelvo
-			if (buscada.getId() == id) return buscada;  
+			if (a.getId().equals(id)) return a;  
 		}
-		
+
+		// Recorremos la lista de alarmas Activadas
+		for (Alarma a: alarmasActivas) {
+
+			// Si la encuentro la devuelvo
+			if (a.getId().equals(id)) return a;  
+		}
+
 		// Devuelvo null si no se encuentra
 		return null;
 	}
@@ -68,19 +72,16 @@ public class Alarmas {
 	 * @return boolean, true si se puede anhadir, false si no.
 	 */
 	public boolean anhadeAlarma(Alarma a) {
-		
+
 		// Guardo el valor (copia por valor) de las alarmas antes de la inserccion
-		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
+		List<Alarma> alarmasActivasOld = new LinkedList<Alarma>(alarmasActivas);
 
 		// Anhado la alarma al la lista de desactivadas y almaceno el resultado
-		boolean ret = alarmasDesactivadas.add(a);
+		boolean ret = alarmasActivas.add(a);
 
 		// Notifico el cambio en el atributo alarmasDesactivadas y
 		// devuelvo los valores antes y despues
-		changeSupport.firePropertyChange("alarmasDesactivadas", alarmasDesactivadasOld, alarmasDesactivadas);
-
-		// TODO: Quitar (depuracion)
-		System.out.println("Alarma Añadida: " + a);
+		changeSupport.firePropertyChange("alarmasActivas", alarmasActivasOld, alarmasActivas);
 
 		// Devuelvo el resulrado de la operacion
 		return ret;
@@ -93,8 +94,10 @@ public class Alarmas {
 	 */
 	public boolean eliminaAlarma(Alarma a) {
 		
+		System.out.print(a.toString());
+
 		// TODO: Comprobar este metodo con Saul
-		
+
 		// Guardo el valor de las listas de alarmas antes de la operacion
 		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
 		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
@@ -110,13 +113,13 @@ public class Alarmas {
 		// Devuelvo el resulrado de la operacion
 		return alarmas.remove(a);
 	}
-	
+
 	/**
 	 * Metodo que activa una alarma.
 	 * @param alarma, Alarma a activar.
 	 */
 	public void activaAlarma(Alarma alarma) {
-		
+
 		// Guardo el valor de las listas de alarmas antes de la operacion
 		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
 		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
@@ -135,7 +138,7 @@ public class Alarmas {
 	 * @param alarma, Alarma a desactivar.
 	 */
 	public void desactivaAlarma(Alarma alarma) {
-		
+
 		// Guardo el valor de las listas de alarmas antes de la operacion
 		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
 		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
@@ -157,7 +160,7 @@ public class Alarmas {
 	public void setState(AlarmasEstado state) {
 		this.state = state;
 	}
-	
+
 	/**
 	 * Metodo que devuelve la alarma mas proxima en el tiempo.
 	 * @return Alarma, alarma mas proxima.
@@ -200,7 +203,7 @@ public class Alarmas {
 	}
 
 	// Metodos correspondientes a las signals
-	
+
 	/**
 	 * Metodo que desencadena las acciones correspondientes a la signal
 	 * nuevaAlarma.

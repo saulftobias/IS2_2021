@@ -71,8 +71,10 @@ class BorraAlarmaAction extends AbstractAction {
 	 * de esta accion.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		// TODO
-		Alarma a = vista.getDesactiva();
+		// TODO: Comprobar con Saul
+		
+		// Si no hay una alarma seleccionada de la lista de desactivas miro en las activas
+		Alarma a = vista.getActiva();
 
 		modelo.borraAlarma(a.getId());
 	}
@@ -134,6 +136,6 @@ class AlarmaOffAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		Alarma a = vista.getActiva();
 
-		modelo.alarmaOn(a.getId());;
+		modelo.alarmaOff(a.getId());;
 	}
 }
