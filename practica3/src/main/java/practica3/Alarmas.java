@@ -69,8 +69,8 @@ public class Alarmas {
 	 */
 	public boolean anhadeAlarma(Alarma a) {
 		
-		// Guardo el valor de las alarmas antes de la inserccion
-		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
+		// Guardo el valor (copia por valor) de las alarmas antes de la inserccion
+		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
 
 		// Anhado la alarma al la lista de desactivadas y almaceno el resultado
 		boolean ret = alarmasDesactivadas.add(a);
@@ -81,7 +81,6 @@ public class Alarmas {
 
 		// TODO: Quitar (depuracion)
 		System.out.println("Alarma Añadida: " + a);
-		System.out.println(changeSupport.toString());
 
 		// Devuelvo el resulrado de la operacion
 		return ret;
@@ -97,8 +96,8 @@ public class Alarmas {
 		// TODO: Comprobar este metodo con Saul
 		
 		// Guardo el valor de las listas de alarmas antes de la operacion
-		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
-		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
+		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
 
 		// La elimino
 		alarmasActivas.remove(a);
@@ -119,8 +118,8 @@ public class Alarmas {
 	public void activaAlarma(Alarma alarma) {
 		
 		// Guardo el valor de las listas de alarmas antes de la operacion
-		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
-		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
+		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
 
 		// La activo
 		alarmasDesactivadas.remove(alarma);
@@ -138,8 +137,8 @@ public class Alarmas {
 	public void desactivaAlarma(Alarma alarma) {
 		
 		// Guardo el valor de las listas de alarmas antes de la operacion
-		List<Alarma> alarmasDesactivadasOld = alarmasDesactivadas;
-		Queue<Alarma> alarmasActivasOld = alarmasActivas;
+		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);
+		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
 
 		// La desactivo
 		alarmasActivas.remove(alarma);
