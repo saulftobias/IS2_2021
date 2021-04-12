@@ -15,7 +15,7 @@ import java.util.TimerTask;
  */
 public class Programada extends AlarmasEstado {
 	
-	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
+	// TimerTask que suena en la hora de la alarma
 	protected SuenaAlarmaTask suenaAlarmaTask;
 	
 	// Redefinicion de los metodos que provocan una accion en respuesta a una signal

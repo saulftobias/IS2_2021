@@ -15,11 +15,11 @@ import java.util.TimerTask;
 public class Sonando extends AlarmasEstado {
 
 	// Constante que representa el tiempo que estará la alarma "sonando"
-	private static final long INTERVALO_SONAR = 1500;
-	
+	private static final long INTERVALO_SONAR = 2500;
+
 	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
 	protected ApagaAlarmaTask apagaAlarmaTask;
-	
+
 	// Redefinicion de los metodos que provocan una accion en respuesta a una signal
 
 	@Override
@@ -51,13 +51,15 @@ public class Sonando extends AlarmasEstado {
 		apagaAlarmaTask = new ApagaAlarmaTask(context, this); 
 		timedStateController.schedule(apagaAlarmaTask, INTERVALO_SONAR);
 		context.activaMelodia();
+		System.out.println("ALARMA SONANDO!!!");
 	}
 
 	@Override
 	public void exitAction(Alarmas context) {
 		context.desactivaMelodia();
+		System.out.println("Alarma deja de sonar");
 	}
-	
+
 	private class ApagaAlarmaTask extends TimerTask {
 
 		// Atributos utilizados para tener visibilidad sobre el contexto de la aplicacion
@@ -70,9 +72,12 @@ public class Sonando extends AlarmasEstado {
 		}
 
 		public void run() { 
-			
+
 			// Acción de salida
 			state.exitAction(context);
+
+			// Acciones asociadas a la transiccion
+			context.eliminaAlarma(context.alarmaMasProxima());
 
 			// Almaceno el valor del próximo estado y le actualizo
 			AlarmasEstado estadoDestino;
@@ -82,9 +87,6 @@ public class Sonando extends AlarmasEstado {
 				estadoDestino = getDesprogramada();
 			}
 			context.setState(estadoDestino);
-
-			// Acciones asociadas a la transiccion
-			context.eliminaAlarma(context.alarmaMasProxima());
 
 			// Ejecuto las acciones de entrada del próximo estado
 			estadoDestino.entryAction(context);

@@ -16,6 +16,7 @@ import javax.swing.Action;
  * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
  * @version abr-2021
  */
+@SuppressWarnings("serial")
 class NuevaAlarmaAction extends AbstractAction {
 
 	// Referencias al modelo y la vista del patron
@@ -47,6 +48,7 @@ class NuevaAlarmaAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class BorraAlarmaAction extends AbstractAction {
 
 	// Referencias al modelo y la vista del patron
@@ -88,6 +90,7 @@ class BorraAlarmaAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class AlarmaOnAction extends AbstractAction {
 
 	// Referencias al modelo y la vista del patron
@@ -123,6 +126,7 @@ class AlarmaOnAction extends AbstractAction {
 	}
 }
 
+@SuppressWarnings("serial")
 class AlarmaOffAction extends AbstractAction {
 
 	// Referencias al modelo y la vista del patron
