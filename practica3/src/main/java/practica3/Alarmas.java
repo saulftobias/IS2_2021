@@ -155,6 +155,10 @@ public class Alarmas {
 	 * @param state, AlarmasEstado estado al que se va a cambiar.
 	 */
 	public void setState(AlarmasEstado state) {
+		
+		// Notificamos a la interfaz que se ha cambiado de estado
+		changeSupport.firePropertyChange("state", this.state, state);
+		
 		this.state = state;
 	}
 
@@ -172,7 +176,6 @@ public class Alarmas {
 	 */
 	public void activaMelodia() {
 		System.out.println("ALARMA SONANDO!!!");
-		changeSupport.firePropertyChange("sonando", null, alarmaMasProxima());
 	}
 
 	/**

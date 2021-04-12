@@ -143,6 +143,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		panel.add(listListaNoActivas);
 	}
 
+	@SuppressWarnings("deprecation")
 	public Date getDate () {
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
@@ -208,6 +209,19 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 			
 			for (Alarma a: alarmasActivadas) {
 				listaActivas.addElement(a);
+			}
+		} else if (evt.getPropertyName().equals("state")) {
+			
+			if (evt.getNewValue() instanceof Sonando) { // Caso de que el estado sea Sonando
+				setNuevaAlarmaAction(null);
+				setEliminarAction(null);
+				setOnAction(null);
+				setOffAction(null);
+			} else { // Caso de que estemos en otro estado
+				setNuevaAlarmaAction(new NuevaAlarmaAction(misAlarmas, this));
+				setEliminarAction(new BorraAlarmaAction(misAlarmas, this));
+				setOnAction(new AlarmaOnAction(misAlarmas, this));
+				setOffAction(new AlarmaOffAction(misAlarmas, this));
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package practica3;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 /**
@@ -15,7 +16,7 @@ import java.util.TimerTask;
 public class Sonando extends AlarmasEstado {
 
 	// Constante que representa el tiempo que estará la alarma "sonando"
-	private static final long INTERVALO_SONAR = 2500;
+	private static final long INTERVALO_SONAR = 5000;
 
 	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
 	protected ApagaAlarmaTask apagaAlarmaTask;
@@ -24,13 +25,19 @@ public class Sonando extends AlarmasEstado {
 
 	@Override
 	public void apagar(Alarmas context) {
-		
+
 		// Si esta signal se ha ejecutado es porque se ha pulsado el boton y hay que cancelar el timer
 		timedStateController.cancel();
 		timedStateController.purge();
+		
+		// Volvemos a crear el timer ya que el anterior ha sido cancelado
+		timedStateController = new Timer();
 
 		// Acción de salida
 		this.exitAction(context);
+
+		// Acciones asociadas a la transiccion
+		context.desactivaAlarma(context.alarmaMasProxima());
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -40,9 +47,6 @@ public class Sonando extends AlarmasEstado {
 			estadoDestino = getDesprogramada();
 		}
 		context.setState(estadoDestino);
-
-		// Acciones asociadas a la transiccion
-		context.desactivaAlarma(context.alarmaMasProxima());
 
 		// Ejecuto las acciones de entrada del próximo estado
 		estadoDestino.entryAction(context);
@@ -67,7 +71,7 @@ public class Sonando extends AlarmasEstado {
 		// Atributos utilizados para tener visibilidad sobre el contexto de la aplicacion
 		private Alarmas context;
 		private AlarmasEstado state;
-		
+
 		public ApagaAlarmaTask(Alarmas context, AlarmasEstado state){
 			this.context = context;
 			this.state = state;
@@ -93,8 +97,6 @@ public class Sonando extends AlarmasEstado {
 			// Ejecuto las acciones de entrada del próximo estado
 			estadoDestino.entryAction(context);
 			estadoDestino.doAction(context);
-			
-			System.out.println("a");
 		}
 	}
 }
