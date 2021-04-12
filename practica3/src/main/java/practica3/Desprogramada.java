@@ -38,6 +38,29 @@ public class Desprogramada extends AlarmasEstado {
 		estadoDestino.entryAction(context);
 		estadoDestino.doAction(context);
 	}
+	
+	@Override
+	public void borraAlarma(Alarmas context, String id) {
+		
+		// Acción de salida
+		this.exitAction(context);
+		
+		// Acciones asociadas a la transiccion
+		context.eliminaAlarma(context.getAlarma(id));
+
+		// Almaceno el valor del próximo estado y le actualizo
+		AlarmasEstado estadoDestino;
+		if (context.alarmasActivasSize() != 0) {
+			estadoDestino = getProgramada();
+		} else {
+			estadoDestino = getDesprogramada();
+		}
+		context.setState(estadoDestino);
+
+		// Ejecuto las acciones de entrada del próximo estado
+		estadoDestino.entryAction(context);
+		estadoDestino.doAction(context);
+	}
 
 	@Override
 	public void alarmaOn(Alarmas context, String id) {

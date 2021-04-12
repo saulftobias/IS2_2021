@@ -21,7 +21,6 @@ public class Alarmas {
 	// la aplicacion
 	private List<Alarma> alarmasDesactivadas = new LinkedList<Alarma>();
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
-	private List<Alarma> alarmas = new ArrayList<Alarma>(); // TODO: Comprobar para que usamos esto
 
 	// Atributo state que representa el estado del conjunto de TODAS las
 	// alarmas (Patron State)
@@ -93,8 +92,6 @@ public class Alarmas {
 	 * @return boolean, true si se puede eliminar, false si no.
 	 */
 	public boolean eliminaAlarma(Alarma a) {
-		
-		System.out.print(a.toString());
 
 		// TODO: Comprobar este metodo con Saul
 
@@ -103,15 +100,15 @@ public class Alarmas {
 		Queue<Alarma> alarmasActivasOld = new PriorityQueue<Alarma>(alarmasActivas);
 
 		// La elimino
-		alarmasActivas.remove(a);
-		alarmasDesactivadas.remove(a);
+		boolean ret1 = alarmasActivas.remove(a);
+		boolean ret2 = alarmasDesactivadas.remove(a);
 
 		// Notifico el cambio en los atributos y devuelvo los valores antes y despues
 		changeSupport.firePropertyChange("alarmasDesactivadas", alarmasDesactivadasOld, alarmasDesactivadas);
 		changeSupport.firePropertyChange("alarmasActivas", alarmasActivasOld, alarmasActivas);
 
 		// Devuelvo el resulrado de la operacion
-		return alarmas.remove(a);
+		return (ret1 | ret2);
 	}
 
 	/**

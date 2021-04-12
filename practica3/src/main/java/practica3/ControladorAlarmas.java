@@ -71,12 +71,20 @@ class BorraAlarmaAction extends AbstractAction {
 	 * de esta accion.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		// TODO: Comprobar con Saul
-		
-		// Si no hay una alarma seleccionada de la lista de desactivas miro en las activas
-		Alarma a = vista.getActiva();
 
-		modelo.borraAlarma(a.getId());
+		// Si no hay una alarma seleccionada de la lista de desactivas miro en las activas
+		Alarma a = vista.getDesactiva();
+
+		if (a == null) {
+			a = vista.getActiva();
+		}
+
+		// Gestion de errores de que no haya ninguna alarma seleccionada
+		try {
+			modelo.borraAlarma(a.getId());
+		} catch (NullPointerException ex) {
+			System.out.println("Ninguna alarma seleccionada");
+		}
 	}
 }
 
@@ -106,7 +114,12 @@ class AlarmaOnAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		Alarma a = vista.getDesactiva();
 
-		modelo.alarmaOn(a.getId());;
+		// Gestion de errores de que no haya ninguna alarma seleccionada
+		try {
+			modelo.alarmaOn(a.getId());
+		} catch (NullPointerException ex) {
+			System.out.println("Ninguna alarma seleccionada");
+		}
 	}
 }
 
@@ -128,7 +141,7 @@ class AlarmaOffAction extends AbstractAction {
 		putValue(Action.NAME, "Off");
 		putValue(Action.SHORT_DESCRIPTION, "Desactivamos una alarma de las que teniamos activas");
 	}
-	
+
 	/**
 	 * Metodo que modela las acciones concretas que desencadena la "ejecucion"
 	 * de esta accion.
@@ -136,6 +149,11 @@ class AlarmaOffAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		Alarma a = vista.getActiva();
 
-		modelo.alarmaOff(a.getId());;
+		// Gestion de errores de que no haya ninguna alarma seleccionada
+		try {
+			modelo.alarmaOff(a.getId());
+		} catch (NullPointerException ex) {
+			System.out.println("Ninguna alarma seleccionada");
+		}
 	}
 }

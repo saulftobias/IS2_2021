@@ -42,7 +42,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		misAlarmas = a;
 		misAlarmas.addPropertyChangeListener(this);
 		init();
-		setBounds(0,0,600,600);
+		setBounds(0,0,600,400);
 	}
 
 	/**
@@ -58,18 +58,19 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		panel.setLayout(null);
 
 		textFieldId = new JTextField();
-		textFieldId.setBounds(205, 207, 96, 19);
+		textFieldId.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldId.setBounds(205, 139, 96, 25);
 		panel.add(textFieldId);
 		textFieldId.setColumns(10);
 
 		lblIdAlarma = new JLabel("Id Alarma");
 		lblIdAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblIdAlarma.setBounds(66, 205, 66, 19);
+		lblIdAlarma.setBounds(33, 142, 66, 19);
 		panel.add(lblIdAlarma);
 
 		lblHoraAlarma = new JLabel("Hora Alarma");
 		lblHoraAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblHoraAlarma.setBounds(66, 237, 114, 25);
+		lblHoraAlarma.setBounds(33, 172, 114, 25);
 		panel.add(lblHoraAlarma);
 
 		Calendar calendar = Calendar.getInstance();
@@ -82,7 +83,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		spinner = new JSpinner(model);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		spinner.setSize(96, 25);
-		spinner.setLocation(205, 236);
+		spinner.setLocation(205, 172);
 
 		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "HH:mm");
 		DateFormatter formatter = (DateFormatter)editor.getTextField().getFormatter();
@@ -94,22 +95,22 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 
 		btnNuevaAlarma = new JButton();
 		btnNuevaAlarma.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNuevaAlarma.setBounds(66, 283, 235, 30);
+		btnNuevaAlarma.setBounds(33, 237, 273, 40);
 		panel.add(btnNuevaAlarma);
 
 		btnApagar = new JButton();
 		btnApagar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnApagar.setBounds(66, 335, 235, 30);
+		btnApagar.setBounds(33, 276, 268, 77);
 		panel.add(btnApagar);
 
 		lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlarmasActivas.setBounds(446, 35, 114, 30);
+		lblAlarmasActivas.setBounds(408, 33, 114, 30);
 		panel.add(lblAlarmasActivas);
 
 		lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
 		lblAlarmasDesactivadas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlarmasDesactivadas.setBounds(435, 207, 157, 30);
+		lblAlarmasDesactivadas.setBounds(392, 201, 157, 30);
 		panel.add(lblAlarmasDesactivadas);
 
 		btnOff = new JButton();
@@ -127,15 +128,15 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		JLabel lblAlarmas = new JLabel("Alarmas");
 		lblAlarmas.setFont(new Font("Arial Black", Font.PLAIN, 45));
 		lblAlarmas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAlarmas.setBounds(66, 46, 235, 100);
+		lblAlarmas.setBounds(33, 27, 235, 100);
 		panel.add(lblAlarmas);
 
 		listListaActivas = new JList<Alarma>(listaActivas);
-		listListaActivas.setBounds(446, 75, 114, 122);
+		listListaActivas.setBounds(372, 75, 188, 122);
 		panel.add(listListaActivas);
 
 		listListaNoActivas = new JList<Alarma>(listaNoActivas);
-		listListaNoActivas.setBounds(446, 237, 114, 122);
+		listListaNoActivas.setBounds(372, 237, 188, 116);
 		panel.add(listListaNoActivas);
 	}
 
