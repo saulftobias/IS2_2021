@@ -29,11 +29,11 @@ public class Sonando extends AlarmasEstado {
 	public void apagar(Alarmas context) {
 
 		// Si esta signal se ha ejecutado es porque se ha pulsado el boton y hay que cancelar el timer
-		timedStateController.cancel();
-		timedStateController.purge();
+		timer.cancel();
+		timer.purge();
 		
 		// Volvemos a crear el timer ya que el anterior ha sido cancelado
-		timedStateController = new Timer();
+		timer = new Timer();
 
 		// Acción de salida
 		this.exitAction(context);
@@ -59,7 +59,7 @@ public class Sonando extends AlarmasEstado {
 	public void entryAction(Alarmas context) {
 		// Programa el evento temporizado 
 		apagaAlarmaTask = new ApagaAlarmaTask(context, this); 
-		timedStateController.schedule(apagaAlarmaTask, INTERVALO_SONAR);
+		timer.schedule(apagaAlarmaTask, INTERVALO_SONAR);
 		context.activaMelodia();
 	}
 

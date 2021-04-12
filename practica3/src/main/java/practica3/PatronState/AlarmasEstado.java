@@ -23,7 +23,7 @@ public abstract class AlarmasEstado {
 	private static AlarmasEstado sonando = new Sonando();
 	
 	// Añadido para gestión del evento temporizado
-	protected Timer timedStateController= new Timer();
+	protected Timer timer= new Timer();
 	
 	// Getters estáticos de los atributos probados de los objetos de cada estado
 	

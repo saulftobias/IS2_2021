@@ -45,7 +45,7 @@ public class Alarmas implements IAlarmasDAO {
 	 * @param id, String identificador de la alarma que se busca.
 	 * @return Alarma, la alarma si se encuentra, null si no.
 	 */
-	public Alarma getAlarma(String id) {
+	public Alarma alarma(String id) {
 
 		// Recorremos la lista de alarmas Desactivadas
 		for (Alarma a: alarmasDesactivadas) {

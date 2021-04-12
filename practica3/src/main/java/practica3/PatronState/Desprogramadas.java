@@ -49,7 +49,7 @@ public class Desprogramadas extends AlarmasEstado {
 		this.exitAction(context);
 		
 		// Acciones asociadas a la transiccion
-		context.eliminaAlarma(context.getAlarma(id));
+		context.eliminaAlarma(context.alarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -72,7 +72,7 @@ public class Desprogramadas extends AlarmasEstado {
 		this.exitAction(context);
 		
 		// Acciones asociadas a la transiccion
-		context.activaAlarma(context.getAlarma(id));
+		context.activaAlarma(context.alarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;

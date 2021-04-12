@@ -54,7 +54,7 @@ public class Programadas extends AlarmasEstado {
 		this.exitAction(context);
 		
 		// Acciones asociadas a la transiccion
-		context.eliminaAlarma(context.getAlarma(id));
+		context.eliminaAlarma(context.alarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -77,7 +77,7 @@ public class Programadas extends AlarmasEstado {
 		this.exitAction(context);
 		
 		// Acciones asociadas a la transiccion
-		context.activaAlarma(context.getAlarma(id));
+		context.activaAlarma(context.alarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -100,7 +100,7 @@ public class Programadas extends AlarmasEstado {
 		this.exitAction(context);
 		
 		// Acciones asociadas a la transiccion
-		context.desactivaAlarma(context.getAlarma(id));
+		context.desactivaAlarma(context.alarma(id));
 
 		// Almaceno el valor del próximo estado y le actualizo
 		AlarmasEstado estadoDestino;
@@ -120,7 +120,7 @@ public class Programadas extends AlarmasEstado {
 	public void entryAction(Alarmas context) {
 		// Programa el evento temporizado 
 		suenaAlarmaTask = new SuenaAlarmaTask(context, this);
-		timedStateController.schedule(suenaAlarmaTask, context.alarmaMasProxima().getHora());
+		timer.schedule(suenaAlarmaTask, context.alarmaMasProxima().getHora());
 	}
 	
 	private class SuenaAlarmaTask extends TimerTask {
