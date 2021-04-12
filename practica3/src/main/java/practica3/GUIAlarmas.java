@@ -146,7 +146,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	public Date getDate () {
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR, fecha.getHours());
+		cal.set(Calendar.HOUR, fecha.getHours() - 12);
 		cal.set(Calendar.MINUTE, fecha.getMinutes());
 		return cal.getTime();
 	}
