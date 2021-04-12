@@ -56,7 +56,7 @@ public class Alarma implements Comparable<Alarma> {
 
 	/**
 	 * Retorna la hora a la que sonara la alarma.
-	 * @return String, el id de la alarma.
+	 * @return Date, la hora de la alarma.
 	 */
 	public Date getHora() {
 		return this.hora;
