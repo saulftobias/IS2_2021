@@ -1,8 +1,10 @@
-package practica3;
+package practica3.Modelo;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+
+import practica3.PatronState.AlarmasEstado;
 
 /**
  * Clase que representa el conjunto de las alarmas de la aplicacion, sea
@@ -15,7 +17,7 @@ import java.util.*;
  * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
  * @version abr-2021
  */
-public class Alarmas {
+public class Alarmas implements IAlarmasDAO {
 
 	// Listas de alarmas en distintas situaciones dentro del contexto de
 	// la aplicacion
@@ -44,8 +46,6 @@ public class Alarmas {
 	 * @return Alarma, la alarma si se encuentra, null si no.
 	 */
 	public Alarma getAlarma(String id) {
-
-		// TODO: Comprobar este metodo con Saul
 
 		// Recorremos la lista de alarmas Desactivadas
 		for (Alarma a: alarmasDesactivadas) {
@@ -92,8 +92,6 @@ public class Alarmas {
 	 * @return boolean, true si se puede eliminar, false si no.
 	 */
 	public boolean eliminaAlarma(Alarma a) {
-
-		// TODO: Comprobar este metodo con Saul
 
 		// Guardo el valor de las listas de alarmas antes de la operacion
 		List<Alarma> alarmasDesactivadasOld = new LinkedList<Alarma>(alarmasDesactivadas);

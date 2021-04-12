@@ -1,7 +1,9 @@
-package practica3;
+package practica3.PatronState;
 
 import java.util.Date;
 import java.util.Timer;
+
+import practica3.Modelo.Alarmas;
 
 /**
  * Clase abstracta que es heredada por cada clase que vaya a representar un 

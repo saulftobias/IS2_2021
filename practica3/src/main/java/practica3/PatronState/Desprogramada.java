@@ -1,6 +1,9 @@
-package practica3;
+package practica3.PatronState;
 
 import java.util.Date;
+
+import practica3.Modelo.Alarma;
+import practica3.Modelo.Alarmas;
 
 /**
  * Clase que hereda de la clase abstracta AlarmasEstado y que modela

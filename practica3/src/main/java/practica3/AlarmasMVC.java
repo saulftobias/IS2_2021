@@ -1,5 +1,9 @@
 package practica3;
 
+import practica3.Controlador.*;
+import practica3.Modelo.Alarmas;
+import practica3.Vista.GUIAlarmas;
+
 /**
  * Clase que sirve para poner en marcha la aplicacion bajo el patron
  * MVC (Modelo-Vista-Controlador).

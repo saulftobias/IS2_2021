@@ -1,4 +1,4 @@
-package practica3;
+package practica3.Modelo;
 
 import java.util.Date;
 

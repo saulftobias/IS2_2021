@@ -1,4 +1,4 @@
-package practica3;
+package practica3.Vista;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,15 +9,31 @@ import java.util.Queue;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 
+import practica3.Controlador.AlarmaOffAction;
+import practica3.Controlador.AlarmaOnAction;
+import practica3.Controlador.BorraAlarmaAction;
+import practica3.Controlador.NuevaAlarmaAction;
+import practica3.Modelo.Alarma;
+import practica3.Modelo.Alarmas;
+import practica3.Modelo.IAlarmasDAO;
+import practica3.PatronState.Sonando;
+
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.*;
 
-
+/**
+ * Clase que juega el rol de la vista (interfaz gráfica) en el patron
+ * MVC (Modelo-Vista-Controlador).
+ * 
+ * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
+ * 			Saul Fernandez Tobias (saul.fernandezt@alumnos.unican.es)
+ * @version abr-2021
+ */
 @SuppressWarnings("serial")
-public class GUIAlarmas extends JFrame implements PropertyChangeListener {
+public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAlarmas {
 
+	// Atributos de los elementos de la interfaz grafica
 	private JFrame frame;
 	private JTextField textFieldId;
 	private JLabel lblIdAlarma;
@@ -35,10 +51,13 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	private DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
 	private DefaultListModel<Alarma> listaNoActivas = new DefaultListModel<Alarma>();
 
-	private Alarmas misAlarmas = new Alarmas();
+	// Referencia al modelo del patron
+	private IAlarmasDAO misAlarmas;
 
 	/**
-	 * Create the application.
+	 * Metodo constructor de la clase. Invoca el metodo que inicializa
+	 * algunos atributos.
+	 * @param a, Alarmas referencia al modelo del patron MVC.
 	 */
 	public GUIAlarmas(Alarmas a) {
 		misAlarmas = a;
@@ -48,10 +67,13 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Metodo que inicializa los metodos de la intefaz grafica.
+	 * Sirve para externalizar esta funcionalidad a un metodo 
+	 * independiente del constructor.
 	 */
 	private void init() {
 
+		// Creacion del panel
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,17 +81,20 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
+		// Creacion del cuadro de texto del id
 		textFieldId = new JTextField();
 		textFieldId.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldId.setBounds(205, 139, 101, 25);
 		panel.add(textFieldId);
 		textFieldId.setColumns(10);
 
+		// Texto que señala donde ha de introducirse el id
 		lblIdAlarma = new JLabel("Id Alarma");
 		lblIdAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIdAlarma.setBounds(33, 142, 66, 19);
 		panel.add(lblIdAlarma);
 
+		// Creacion del selector de la hora
 		lblHoraAlarma = new JLabel("Hora Alarma");
 		lblHoraAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblHoraAlarma.setBounds(33, 172, 114, 25);
@@ -96,46 +121,64 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		spinner.setEditor(editor);
 		panel.add(spinner);
 
+		// Creacion del boton de añadir alarma
 		btnNuevaAlarma = new JButton();
+		btnNuevaAlarma.setText("Añade Alarma");
 		btnNuevaAlarma.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNuevaAlarma.setBounds(33, 237, 273, 40);
 		panel.add(btnNuevaAlarma);
 
+		// Creacion del boton de apagar
 		btnApagar = new JButton();
+		btnApagar.setForeground(new Color(178, 34, 34));
+		btnApagar.setText("Apagar");
 		btnApagar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnApagar.setBounds(33, 276, 273, 77);
 		panel.add(btnApagar);
 
+		// Texto que indica la lista de alarmas activas
 		lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlarmasActivas.setBounds(453, 27, 114, 30);
+		lblAlarmasActivas.setBounds(455, 16, 114, 30);
 		panel.add(lblAlarmasActivas);
 
+		// Texto que indica la lista de alarmas desactivas
 		lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
 		lblAlarmasDesactivadas.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAlarmasDesactivadas.setBounds(436, 153, 157, 30);
 		panel.add(lblAlarmasDesactivadas);
 
+		// Creacion del boton que desactiva la alarma
 		btnOff = new JButton();
-		btnOff.setBounds(525, 334, 56, 19);
+		btnOff.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnOff.setText("Off");
+		btnOff.setBounds(449, 334, 56, 19);
 		panel.add(btnOff);
 
+		// Creacion del boton que activa la alarma
 		btnOn = new JButton();
-		btnOn.setBounds(593, 334, 52, 19);
+		btnOn.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnOn.setText("On");
+		btnOn.setBounds(517, 334, 52, 19);
 		panel.add(btnOn);
 
+		// Creacion del boton que elimina alarmas
 		btnEliminar = new JButton();
-		btnEliminar.setBounds(525, 306, 120, 19);
+		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnEliminar.setText("Borra Alarma");
+		btnEliminar.setBounds(449, 307, 120, 19);
 		panel.add(btnEliminar);
 
+		// Creacion del texto que es el "titulo" de la aplicacion
 		JLabel lblAlarmas = new JLabel("Alarmas");
 		lblAlarmas.setFont(new Font("Arial Black", Font.PLAIN, 45));
 		lblAlarmas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlarmas.setBounds(33, 27, 273, 100);
 		panel.add(lblAlarmas);
 
+		// Paneles donde se muestran las alarmas activas y desactivadas
 		listListaActivas = new JList<Alarma>(listaActivas);
-		listListaActivas.setBounds(372, 52, 273, 100);
+		listListaActivas.setBounds(372, 41, 273, 111);
 		panel.add(listListaActivas);
 
 		listListaNoActivas = new JList<Alarma>(listaNoActivas);
@@ -143,8 +186,13 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		panel.add(listListaNoActivas);
 	}
 
+	/**
+	 * Metodo que devuelve la fecha (fecha y hora) obtenida por
+	 * el selector de hora.
+	 * @return Date, hora seleccionada.
+	 */
 	@SuppressWarnings("deprecation")
-	public Date getDate () {
+	public Date getDate() {
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR, fecha.getHours() - 12);
@@ -152,38 +200,84 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener {
 		return cal.getTime();
 	}
 
-	public String getId () {
+	/**
+	 * Metodo que devuelve el String introducido por el usuario
+	 * como id de la alarma en el cuadro de texto de la interfaz.
+	 * @return String, String del id.
+	 */
+	public String getId() {
 		return textFieldId.getText();
 	}
 
-	public Alarma getActiva () {
+	/**
+	 * Metodo que devuelve la Alarma seleccionada por el usuario
+	 * de entre la lista de alarmas activas.
+	 * @return Alarma, objeto de la clase alarma seleccionada por
+	 * el usuario.
+	 */
+	public Alarma getActiva() {
 		return listListaActivas.getSelectedValue();
 	}
 
-	public Alarma getDesactiva () {
+	/**
+	 * Metodo que devuelve la Alarma seleccionada por el usuario
+	 * de entre la lista de alarmas desactivadas.
+	 * @return Alarma, objeto de la clase alarma seleccionada por
+	 * el usuario.
+	 */
+	public Alarma getDesactiva() {
 		return listListaNoActivas.getSelectedValue();
 	}
 
+	/**
+	 * Metodo que asigna la accion pasada como parametro de entrada
+	 * al boton del que se ejecuta.
+	 * @param action, Action que ejecuta el boton.
+	 */
 	public void setNuevaAlarmaAction(Action action) {
 		btnNuevaAlarma.setAction(action);
 	}
 
+	/**
+	 * Metodo que asigna la accion pasada como parametro de entrada
+	 * al boton del que se ejecuta.
+	 * @param action, Action que ejecuta el boton.
+	 */
 	public void setApagarAction(Action action) {
 		btnApagar.setAction(action);
 	}
 
+	/**
+	 * Metodo que asigna la accion pasada como parametro de entrada
+	 * al boton del que se ejecuta.
+	 * @param action, Action que ejecuta el boton.
+	 */
 	public void setOffAction(Action action) {
 		btnOff.setAction(action);
 	}
 
+	/**
+	 * Metodo que asigna la accion pasada como parametro de entrada
+	 * al boton del que se ejecuta.
+	 * @param action, Action que ejecuta el boton.
+	 */
 	public void setOnAction(Action action) {
 		btnOn.setAction(action);
 	}
 
+	/**
+	 * Metodo que asigna la accion pasada como parametro de entrada
+	 * al boton del que se ejecuta.
+	 * @param action, Action que ejecuta el boton.
+	 */
 	public void setEliminarAction(Action action) {
 		btnEliminar.setAction(action);
 	}
 
+	/**
+	 * Metodo que se ejectua cada vez que la clase del modelo notifique un
+	 * cambio a los objetos que esten suscritos a los distintos eventos.
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		if (evt.getPropertyName().equals("alarmasDesactivadas")) { // Caso de que el atributo que se cambie sean las alarmas Desactivadas
