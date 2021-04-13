@@ -1,6 +1,7 @@
 package practica3.PatronState;
 
 import java.util.Date;
+import java.util.Timer;
 import java.util.TimerTask;
 
 import practica3.Modelo.Alarma;
@@ -18,18 +19,18 @@ import practica3.Modelo.Alarmas;
  * @version abr-2021
  */
 public class Programadas extends AlarmasEstado {
-	
+
 	// TimerTask que suena en la hora de la alarma
 	protected SuenaAlarmaTask suenaAlarmaTask;
-	
+
 	// Redefinicion de los metodos que provocan una accion en respuesta a una signal
-	
+
 	@Override
 	public void nuevaAlarma(Alarmas context, String id, Date hora) {
 
 		// Acción de salida
 		this.exitAction(context);
-		
+
 		// Acciones asociadas a la transiccion
 		context.anhadeAlarma(new Alarma(id, hora));
 
@@ -49,10 +50,10 @@ public class Programadas extends AlarmasEstado {
 
 	@Override
 	public void borraAlarma(Alarmas context, String id) {
-		
+
 		// Acción de salida
 		this.exitAction(context);
-		
+
 		// Acciones asociadas a la transiccion
 		context.eliminaAlarma(context.alarma(id));
 
@@ -69,13 +70,13 @@ public class Programadas extends AlarmasEstado {
 		estadoDestino.entryAction(context);
 		estadoDestino.doAction(context);
 	}
-	
+
 	@Override
 	public void alarmaOn(Alarmas context, String id) {
 
 		// Acción de salida
 		this.exitAction(context);
-		
+
 		// Acciones asociadas a la transiccion
 		context.activaAlarma(context.alarma(id));
 
@@ -95,10 +96,10 @@ public class Programadas extends AlarmasEstado {
 
 	@Override
 	public void alarmaOff(Alarmas context, String id) {
-		
+
 		// Acción de salida
 		this.exitAction(context);
-		
+
 		// Acciones asociadas a la transiccion
 		context.desactivaAlarma(context.alarma(id));
 
@@ -115,14 +116,22 @@ public class Programadas extends AlarmasEstado {
 		estadoDestino.entryAction(context);
 		estadoDestino.doAction(context);
 	}
-	
+
 	@Override
 	public void entryAction(Alarmas context) {
+
+
+		// Cancelamos el timer y lo volvemos a crear para el caso de que se haya quedado programada
+		// la alarma mas proxima anterior y se haya eliminado / desprogramado
+		timer.cancel();
+		timer.purge();
+		timer = new Timer();
+
 		// Programa el evento temporizado 
 		suenaAlarmaTask = new SuenaAlarmaTask(context, this);
 		timer.schedule(suenaAlarmaTask, context.alarmaMasProxima().getHora());
 	}
-	
+
 	private class SuenaAlarmaTask extends TimerTask {
 
 		// Atributos utilizados para tener visibilidad sobre el contexto de la aplicacion
@@ -135,7 +144,7 @@ public class Programadas extends AlarmasEstado {
 		}
 
 		public void run() { 
-			
+
 			// Acción de salida
 			state.exitAction(context);
 

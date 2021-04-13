@@ -13,8 +13,6 @@ public class Error {
 
 	public JFrame frame;
 
-
-
 	/**
 	 * Create the application.
 	 */

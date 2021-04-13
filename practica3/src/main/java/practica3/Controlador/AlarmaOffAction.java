@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 
 import practica3.Modelo.Alarma;
 import practica3.Modelo.IAlarmasDAO;
@@ -51,6 +52,8 @@ public class AlarmaOffAction extends AbstractAction {
 			modelo.alarmaOff(a.getId());
 		} catch (NullPointerException ex) {
 			System.out.println("Ninguna alarma seleccionada");
+			
+			JOptionPane.showMessageDialog(null, "ERROR: Ninguna alarma seleccionada");
 		}
 	}
 }
