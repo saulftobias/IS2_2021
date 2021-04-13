@@ -58,7 +58,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	private JList<Alarma> listListaActivas;
 	private DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
 	private DefaultListModel<Alarma> listaNoActivas = new DefaultListModel<Alarma>();
-	
+
 	// Atributo del sonido que se reproduce
 	private Clip sonido;
 
@@ -81,7 +81,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		// Centramos la ventana
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-		
+
 		// Obtenemos el sonido
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("alarm.wav").getAbsoluteFile());
@@ -89,6 +89,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			sonido.open(audioInputStream);
 		} catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
 			System.out.println("Error al abrir el sonido.");
+			sonido = null;
 		}
 	}
 
@@ -222,7 +223,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		// Para obtener la hora
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
-		
+
 		// Hemos añadido el "-12" ya que por motivos que desconocemos, la 
 		// hora que coge por defecto es dentro de 12 horas
 		cal.set(Calendar.HOUR, fecha.getHours() - 12);
@@ -348,18 +349,24 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 				setOffAction(new AlarmaOffAction(misAlarmas, this));
 			}
 		} else if (evt.getPropertyName().equals("sonido")) { // Caso de que haya que encender / apagar el sonido
-			
+
 			if (!sonido.isActive()) { // Caso de que vaya a sonar la alarma
-				sonido.start(); // Inicio el sonido
-				sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
+
+				if (sonido != null) {
+					sonido.start(); // Inicio el sonido
+					sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
+				}
 				JOptionPane.showMessageDialog(null, misAlarmas.alarmaMasProxima().toString());
 			} else { // Caso de que vaya a dejar de sonar la alarma
-				sonido.stop(); // Paro el sonido
-				sonido.setMicrosecondPosition(0); // Pongo el sonido al principio
+
+				if (sonido != null) {
+					sonido.stop(); // Paro el sonido
+					sonido.setMicrosecondPosition(0); // Pongo el sonido al principio
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Metodo que se dispara cuando cerramos la ventana para que,
 	 * ademas de cerrar la ventana, se "mate" el proceso java de la
@@ -367,8 +374,8 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	 */
 	@Override
 	protected void processWindowEvent(WindowEvent e) {
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-           System.exit(ABORT);;
-        }
-     }
+		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+			System.exit(ABORT);;
+		}
+	}
 }
