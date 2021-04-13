@@ -14,7 +14,6 @@ public class Alarma implements Comparable<Alarma> {
 	// Atributos de la clase
 	private String id;
 	private Date hora;
-	private boolean sonando; // TODO: Ver su se termina haciendo asi
 
 	/**
 	 * Constructor de la clase. Inicializa los atributos que se pasan 
@@ -27,23 +26,6 @@ public class Alarma implements Comparable<Alarma> {
 		this.id = id;
 		this.hora = hora;
 	}
-
-	// Metodos "setters"
-
-	/**
-	 * Hace que la alarma deje de sonar.
-	 */
-	public void desactiva() {
-		this.sonando = false;
-	}
-
-	/**
-	 * Hace que la alarma suene.
-	 */
-	public void activa() {
-		this.sonando = true;
-	}
-
 	// Metodos observadores
 
 	/**
@@ -60,14 +42,6 @@ public class Alarma implements Comparable<Alarma> {
 	 */
 	public Date getHora() {
 		return this.hora;
-	}
-
-	/**
-	 * Retorna si la alarma esta sonando en el momento que se invoca.
-	 * @return boolean, true si esta sonando, false si no.
-	 */
-	public boolean estaSonando() {
-		return this.sonando;
 	}
 
 	// Otros metodos

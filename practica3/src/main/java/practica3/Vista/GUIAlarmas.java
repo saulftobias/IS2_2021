@@ -6,6 +6,11 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 
@@ -19,8 +24,11 @@ import practica3.Modelo.IAlarmasDAO;
 import practica3.PatronState.Sonando;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Clase que juega el rol de la vista (interfaz gráfica) en el patron
@@ -50,6 +58,9 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	private JList<Alarma> listListaActivas;
 	private DefaultListModel<Alarma> listaActivas = new DefaultListModel<Alarma>();
 	private DefaultListModel<Alarma> listaNoActivas = new DefaultListModel<Alarma>();
+	
+	// Atributo del sonido que se reproduce
+	private Clip sonido;
 
 	// Referencia al modelo del patron
 	private IAlarmasDAO misAlarmas;
@@ -70,6 +81,15 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		// Centramos la ventana
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
+		// Obtenemos el sonido
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("alarm.wav").getAbsoluteFile());
+			sonido = AudioSystem.getClip();
+			sonido.open(audioInputStream);
+		} catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+			System.out.println("Error al abrir el sonido.");
+		}
 	}
 
 	/**
@@ -199,9 +219,13 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	 */
 	@SuppressWarnings("deprecation")
 	public Date getDate() {
+		// Para obtener la hora
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR, fecha.getHours());
+		
+		// Hemos añadido el "-12" ya que por motivos que desconocemos, la 
+		// hora que coge por defecto es dentro de 12 horas
+		cal.set(Calendar.HOUR, fecha.getHours() - 12);
 		cal.set(Calendar.MINUTE, fecha.getMinutes());
 		return cal.getTime();
 	}
@@ -323,6 +347,28 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 				setOnAction(new AlarmaOnAction(misAlarmas, this));
 				setOffAction(new AlarmaOffAction(misAlarmas, this));
 			}
+		} else if (evt.getPropertyName().equals("sonido")) { // Caso de que haya que encender / apagar el sonido
+			
+			if (!sonido.isActive()) { // Caso de que vaya a sonar la alarma
+				sonido.start(); // Inicio el sonido
+				sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
+				JOptionPane.showMessageDialog(null, misAlarmas.alarmaMasProxima().toString());
+			} else { // Caso de que vaya a dejar de sonar la alarma
+				sonido.stop(); // Paro el sonido
+				sonido.setMicrosecondPosition(0); // Pongo el sonido al principio
+			}
 		}
 	}
+	
+	/**
+	 * Metodo que se dispara cuando cerramos la ventana para que,
+	 * ademas de cerrar la ventana, se "mate" el proceso java de la
+	 * aplicacion.
+	 */
+	@Override
+	protected void processWindowEvent(WindowEvent e) {
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+           System.exit(ABORT);;
+        }
+     }
 }

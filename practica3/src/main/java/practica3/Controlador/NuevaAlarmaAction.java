@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 
 import practica3.Modelo.IAlarmasDAO;
 import practica3.Vista.IGUIAlarmas;
@@ -47,6 +48,11 @@ public class NuevaAlarmaAction extends AbstractAction {
 		String newId = vista.getId();
 		Date newDate = vista.getDate();
 
-		modelo.nuevaAlarma(newId, newDate);
+		if (modelo.alarma(newId) == null) {
+			modelo.nuevaAlarma(newId, newDate);
+		} else  {
+			// Mensaje de error si ya existe una alarma con ese id
+			JOptionPane.showMessageDialog(null, "ERROR: Ya existe una alarma con ese id");
+		}
 	}
 }

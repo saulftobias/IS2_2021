@@ -18,7 +18,7 @@ import practica3.Modelo.Alarmas;
 public class Sonando extends AlarmasEstado {
 
 	// Constante que representa el tiempo que estará la alarma "sonando"
-	private static final long INTERVALO_SONAR = 5000;
+	private static final long INTERVALO_SONAR = 7000;
 
 	// TimerTask que expira cuando termina el tiempo INTERVALO_SONAR
 	protected ApagaAlarmaTask apagaAlarmaTask;

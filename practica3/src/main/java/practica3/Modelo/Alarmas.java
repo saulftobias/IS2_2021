@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import practica3.PatronState.AlarmasEstado;
 
 /**
@@ -153,10 +155,10 @@ public class Alarmas implements IAlarmasDAO {
 	 * @param state, AlarmasEstado estado al que se va a cambiar.
 	 */
 	public void setState(AlarmasEstado state) {
-		
+
 		// Notificamos a la interfaz que se ha cambiado de estado
 		changeSupport.firePropertyChange("state", this.state, state);
-		
+
 		this.state = state;
 	}
 
@@ -173,6 +175,10 @@ public class Alarmas implements IAlarmasDAO {
 	 * a los observadores.
 	 */
 	public void activaMelodia() {
+		
+		// Lo del mensaje que se muestra y el sonido lo coloco en la GUI ya que
+		// es algo adincional y que concierne a la vista del modelo
+		changeSupport.firePropertyChange("sonido", null, null);
 		System.out.println("ALARMA SONANDO!!!");
 	}
 
@@ -181,6 +187,7 @@ public class Alarmas implements IAlarmasDAO {
 	 * a los observadores.
 	 */
 	public void desactivaMelodia() {
+		changeSupport.firePropertyChange("sonido", null, null);
 		System.out.println("Alarma deja de sonar");
 	}
 
