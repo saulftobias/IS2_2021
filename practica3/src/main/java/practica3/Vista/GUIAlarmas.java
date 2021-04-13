@@ -357,7 +357,6 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 						sonido.start(); // Inicio el sonido
 						sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
 					}
-					JOptionPane.showMessageDialog(null, misAlarmas.alarmaMasProxima().toString());
 				} else { // Caso de que vaya a dejar de sonar la alarma
 
 					sonido.stop(); // Paro el sonido
