@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import practica3.PatronState.AlarmasEstado;
 
 /**
@@ -178,6 +180,7 @@ public class Alarmas implements IAlarmasDAO {
 		// es algo adincional y que concierne a la vista del modelo
 		changeSupport.firePropertyChange("sonido", null, null);
 		System.out.println("ALARMA SONANDO!!!");
+		JOptionPane.showMessageDialog(null, alarmaMasProxima().toString());
 	}
 
 	/**
