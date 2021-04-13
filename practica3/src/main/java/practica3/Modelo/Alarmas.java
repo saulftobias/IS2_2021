@@ -4,8 +4,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 import practica3.PatronState.AlarmasEstado;
 
 /**

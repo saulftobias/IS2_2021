@@ -10,7 +10,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -25,6 +25,15 @@
 							</mainClass>
 						</manifest>
 					</archive>
+				</configuration>
+			</plugin>
+			<!-- Anhadido de forma adicional para poder ejecutarlo desde maven -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>practica3.AlarmasMVC</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -1,6 +1,5 @@
 package practica3.Controlador;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
