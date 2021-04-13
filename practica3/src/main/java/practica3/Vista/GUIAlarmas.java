@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Clase que juega el rol de la vista (interfaz gráfica) en el patron
+ * Clase que juega el rol de la vista (interfaz grafica) en el patron
  * MVC (Modelo-Vista-Controlador).
  * 
  * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
@@ -117,7 +117,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		panel.add(textFieldId);
 		textFieldId.setColumns(10);
 
-		// Texto que señala donde ha de introducirse el id
+		// Texto que senhala donde ha de introducirse el id
 		lblIdAlarma = new JLabel("Id Alarma");
 		lblIdAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIdAlarma.setBounds(33, 142, 66, 19);
@@ -150,9 +150,9 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		spinner.setEditor(editor);
 		panel.add(spinner);
 
-		// Creacion del boton de añadir alarma
+		// Creacion del boton de anhadir alarma
 		btnNuevaAlarma = new JButton();
-		btnNuevaAlarma.setText("Añade Alarma");
+		btnNuevaAlarma.setText("AÃ±ade Alarma");
 		btnNuevaAlarma.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNuevaAlarma.setBounds(33, 237, 273, 40);
 		panel.add(btnNuevaAlarma);
@@ -226,7 +226,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
 
-		// Hemos añadido el "-12" ya que por motivos que desconocemos, la 
+		// Hemos anhadido el "-12" ya que por motivos que desconocemos, la 
 		// hora que coge por defecto es dentro de 12 horas
 		cal.set(Calendar.HOUR, fecha.getHours() - 12);
 		cal.set(Calendar.MINUTE, fecha.getMinutes());
@@ -319,7 +319,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			@SuppressWarnings("unchecked")
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
 
-			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
+			// Dado que no hay ningun metodo que los anhada todos, borramos la lista y la recorremos ahadiendolos
 			listaNoActivas.removeAllElements();
 
 			for (Alarma a: alarmasDesactivadas) {
@@ -331,7 +331,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			@SuppressWarnings("unchecked")
 			Queue<Alarma> alarmasActivadas =  (PriorityQueue<Alarma>) evt.getNewValue();
 
-			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
+			// Dado que no hay ningun metodo que los anhada todos, borramos la lista y la recorremos anhadiendolos
 			listaActivas.removeAllElements();
 
 			for (Alarma a: alarmasActivadas) {
