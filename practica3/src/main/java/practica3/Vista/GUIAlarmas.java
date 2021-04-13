@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Clase que juega el rol de la vista (interfaz grÃ¡fica) en el patron
+ * Clase que juega el rol de la vista (interfaz gráfica) en el patron
  * MVC (Modelo-Vista-Controlador).
  * 
  * @author 	Alvaro Lopez Garcia (alvaro.lopezgar@alumnos.unican.es)
@@ -83,8 +83,10 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
 		// Obtenemos el sonido
+		System.out.println("La ruta es : " + new File("alarm.wav").getAbsoluteFile());
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("alarm.wav").getAbsoluteFile());
+			System.out.println("La ruta es : " + new File("alarm.wav").getAbsoluteFile());
 			sonido = AudioSystem.getClip();
 			sonido.open(audioInputStream);
 		} catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
@@ -115,7 +117,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		panel.add(textFieldId);
 		textFieldId.setColumns(10);
 
-		// Texto que seÃ±ala donde ha de introducirse el id
+		// Texto que señala donde ha de introducirse el id
 		lblIdAlarma = new JLabel("Id Alarma");
 		lblIdAlarma.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIdAlarma.setBounds(33, 142, 66, 19);
@@ -148,9 +150,9 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		spinner.setEditor(editor);
 		panel.add(spinner);
 
-		// Creacion del boton de aÃ±adir alarma
+		// Creacion del boton de añadir alarma
 		btnNuevaAlarma = new JButton();
-		btnNuevaAlarma.setText("AÃ±ade Alarma");
+		btnNuevaAlarma.setText("Añade Alarma");
 		btnNuevaAlarma.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNuevaAlarma.setBounds(33, 237, 273, 40);
 		panel.add(btnNuevaAlarma);
@@ -224,7 +226,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
 
-		// Hemos aÃ±adido el "-12" ya que por motivos que desconocemos, la 
+		// Hemos añadido el "-12" ya que por motivos que desconocemos, la 
 		// hora que coge por defecto es dentro de 12 horas
 		cal.set(Calendar.HOUR, fecha.getHours() - 12);
 		cal.set(Calendar.MINUTE, fecha.getMinutes());
@@ -317,7 +319,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			@SuppressWarnings("unchecked")
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
 
-			// Dado que no hay ningun metodo que los aÃ±ada todos, borramos la lista y la recorremos aÃ±adiendolos
+			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaNoActivas.removeAllElements();
 
 			for (Alarma a: alarmasDesactivadas) {
@@ -329,7 +331,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			@SuppressWarnings("unchecked")
 			Queue<Alarma> alarmasActivadas =  (PriorityQueue<Alarma>) evt.getNewValue();
 
-			// Dado que no hay ningun metodo que los aÃ±ada todos, borramos la lista y la recorremos aÃ±adiendolos
+			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaActivas.removeAllElements();
 
 			for (Alarma a: alarmasActivadas) {
