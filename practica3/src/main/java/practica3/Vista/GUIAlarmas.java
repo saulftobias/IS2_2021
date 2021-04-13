@@ -350,18 +350,19 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			}
 		} else if (evt.getPropertyName().equals("sonido")) { // Caso de que haya que encender / apagar el sonido
 
-			if (!sonido.isActive()) { // Caso de que vaya a sonar la alarma
+			if (sonido != null) { // Caso de que haya sonido
+				
+				if (!sonido.isActive()) { // Caso de que vaya a sonar la alarma
+					if (sonido != null) {
+						sonido.start(); // Inicio el sonido
+						sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
+					}
+					JOptionPane.showMessageDialog(null, misAlarmas.alarmaMasProxima().toString());
+				} else { // Caso de que vaya a dejar de sonar la alarma
 
-				if (sonido != null) {
-					sonido.start(); // Inicio el sonido
-					sonido.loop(Clip.LOOP_CONTINUOUSLY); // Lo pongo en bucle por si el intervalo es mas largo que el sonido
-				}
-				JOptionPane.showMessageDialog(null, misAlarmas.alarmaMasProxima().toString());
-			} else { // Caso de que vaya a dejar de sonar la alarma
-
-				if (sonido != null) {
 					sonido.stop(); // Paro el sonido
 					sonido.setMicrosecondPosition(0); // Pongo el sonido al principio
+
 				}
 			}
 		}
