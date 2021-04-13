@@ -350,6 +350,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 			}
 		} else if (evt.getPropertyName().equals("sonido")) { // Caso de que haya que encender / apagar el sonido
 
+			
 			if (!sonido.isActive()) { // Caso de que vaya a sonar la alarma
 
 				if (sonido != null) {
