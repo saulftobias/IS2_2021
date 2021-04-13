@@ -60,10 +60,16 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	 * @param a, Alarmas referencia al modelo del patron MVC.
 	 */
 	public GUIAlarmas(Alarmas a) {
+		setResizable(false);
 		misAlarmas = a;
 		misAlarmas.addPropertyChangeListener(this);
+
 		init();
 		setBounds(0,0,700,400);
+
+		// Centramos la ventana
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	}
 
 	/**
@@ -104,7 +110,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		calendar.set(Calendar.getInstance().get(Calendar.YEAR), 
 				Calendar.getInstance().get(Calendar.MONTH), 
 				Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		
+
 		SpinnerDateModel model = new SpinnerDateModel();
 		model.setValue(calendar.getTime());
 
@@ -139,7 +145,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 		// Texto que indica la lista de alarmas activas
 		lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAlarmasActivas.setBounds(455, 16, 114, 30);
+		lblAlarmasActivas.setBounds(455, 6, 114, 40);
 		panel.add(lblAlarmasActivas);
 
 		// Texto que indica la lista de alarmas desactivas
@@ -178,7 +184,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 
 		// Paneles donde se muestran las alarmas activas y desactivadas
 		listListaActivas = new JList<Alarma>(listaActivas);
-		listListaActivas.setBounds(372, 41, 273, 111);
+		listListaActivas.setBounds(372, 35, 273, 117);
 		panel.add(listListaActivas);
 
 		listListaNoActivas = new JList<Alarma>(listaNoActivas);
@@ -195,7 +201,7 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	public Date getDate() {
 		Date fecha = (Date) spinner.getValue();
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR, fecha.getHours() - 12);
+		cal.set(Calendar.HOUR, fecha.getHours());
 		cal.set(Calendar.MINUTE, fecha.getMinutes());
 		return cal.getTime();
 	}
@@ -281,31 +287,31 @@ public class GUIAlarmas extends JFrame implements PropertyChangeListener, IGUIAl
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		if (evt.getPropertyName().equals("alarmasDesactivadas")) { // Caso de que el atributo que se cambie sean las alarmas Desactivadas
-			
+
 			// Obtenemos el valor de la nueva lista de alarmas desactivadas
 			@SuppressWarnings("unchecked")
 			LinkedList<Alarma> alarmasDesactivadas =  (LinkedList<Alarma>) evt.getNewValue();
-			
+
 			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaNoActivas.removeAllElements();
-			
+
 			for (Alarma a: alarmasDesactivadas) {
 				listaNoActivas.addElement(a);
 			}
 		} else if (evt.getPropertyName().equals("alarmasActivas")) { // Caso de que el atributo que se cambie sean las alarmas Activadas
-			
+
 			// Obtenemos el valor de la nueva lista de alarmas activas
 			@SuppressWarnings("unchecked")
 			Queue<Alarma> alarmasActivadas =  (PriorityQueue<Alarma>) evt.getNewValue();
-			
+
 			// Dado que no hay ningun metodo que los añada todos, borramos la lista y la recorremos añadiendolos
 			listaActivas.removeAllElements();
-			
+
 			for (Alarma a: alarmasActivadas) {
 				listaActivas.addElement(a);
 			}
 		} else if (evt.getPropertyName().equals("state")) {
-			
+
 			if (evt.getNewValue() instanceof Sonando) { // Caso de que el estado sea Sonando
 				setNuevaAlarmaAction(null);
 				setEliminarAction(null);

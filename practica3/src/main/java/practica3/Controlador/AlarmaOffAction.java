@@ -51,8 +51,8 @@ public class AlarmaOffAction extends AbstractAction {
 		try {
 			modelo.alarmaOff(a.getId());
 		} catch (NullPointerException ex) {
-			System.out.println("Ninguna alarma seleccionada");
 			
+			// Mensaje de error si no se selecciona alarma
 			JOptionPane.showMessageDialog(null, "ERROR: Ninguna alarma seleccionada");
 		}
 	}
