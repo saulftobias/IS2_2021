@@ -1,13 +1,15 @@
+package practica4;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import es.unican.is2.seguros.model.Cliente;
-import es.unican.is2.seguros.model.Cobertura;
-import es.unican.is2.seguros.model.DatoIncorrectoException;
-import es.unican.is2.seguros.model.Seguro;
+import Modelo.Cliente;
+import Modelo.Cobertura;
+import Modelo.DatoIncorrectoException;
+import Modelo.Seguro;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;

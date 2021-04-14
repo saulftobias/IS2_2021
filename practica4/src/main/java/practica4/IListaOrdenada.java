@@ -1,4 +1,4 @@
-package es.unican.is2.containers;
+package practica4;
 
 /**
  * TDA ListaOrdenada 
@@ -10,31 +10,31 @@ package es.unican.is2.containers;
 public interface IListaOrdenada<E> {
 
     /**
-	 * Retorna el elemento que ocupa la posición indicada
+	 * Retorna el elemento que ocupa la posiciï¿½n indicada
 	 * @param indice Indice del elemento al que se accede
-	 * @return El elemento en la posición indice
-	 * @throws IndexOutOfBoundsException si el índice es incorrecto
+	 * @return El elemento en la posiciï¿½n indice
+	 * @throws IndexOutOfBoundsException si el ï¿½ndice es incorrecto
 	 */
     public E get(int indice) throws IndexOutOfBoundsException;
     
     
     /**
-     * Añade el elemento que se pasa como parámetro a la posición
+     * Aï¿½ade el elemento que se pasa como parï¿½metro a la posiciï¿½n
      * que le corresponda por orden natural
-     * @param elemento Elemento a añadir
+     * @param elemento Elemento a aï¿½adir
      */
     public void add(E elemento);
     
     /**
-     * Elimina el elemento que ocupa la posición indicada
+     * Elimina el elemento que ocupa la posiciï¿½n indicada
      * @param indice Indice del elemento que se quiere eliminar
      * @return El elemento eliminado
-     * @throws IndexOutOfBoundsException si el índice es incorrecto
+     * @throws IndexOutOfBoundsException si el ï¿½ndice es incorrecto
      */
     public E remove(int indice) throws IndexOutOfBoundsException;
     
     /**
-     * Retorna el tamaño de la lista
+     * Retorna el tamaï¿½o de la lista
      */
     public int size();
     
