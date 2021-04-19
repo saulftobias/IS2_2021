@@ -1,15 +1,25 @@
 package Modelo;
 
+import java.util.Date;
+
 public class Seguro {
 	
 	// Atributos de la clase
-	private int potencia;
+	private int potenciaCV;
 	Cliente cliente;
 	Cobertura cobertura;
+	Date fechaUltimoSiniestro;
 	
-	
+	public Date getFechaUltimoSiniestro() {
+		return fechaUltimoSiniestro;
+	}
+
+	public void setFechaUltimoSiniestro(Date fechaUltimoSiniestro) {
+		this.fechaUltimoSiniestro = fechaUltimoSiniestro;
+	}
+
 	public Seguro(int potencia, Cliente cliente, Cobertura cobertura) throws DatoIncorrectoException {
-		this.potencia = potencia;
+		this.potenciaCV = potencia;
 		this.cliente = cliente;
 		this.cobertura = cobertura;
 	}
@@ -20,11 +30,11 @@ public class Seguro {
 	}
 
 	public int getPotencia() {
-		return potencia;
+		return potenciaCV;
 	}
 
 	public void setPotencia(int potencia) {
-		this.potencia = potencia;
+		this.potenciaCV = potencia;
 	}
 
 	public Cliente getCliente() {

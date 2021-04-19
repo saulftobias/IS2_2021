@@ -2,13 +2,17 @@ package Modelo;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class SeguroTest {
 	
-	private Seguro seguro;
+	private static final int SEGUNDOS_EN_ANHO = 31536000;
 	
+	// Atributos de la clase
+	private Seguro seguro;
 	private Cliente cliente;
 	
 	@Before
@@ -16,7 +20,6 @@ public class SeguroTest {
 		cliente = new Cliente("Enrique", "Vallejo", false);
 	}
 
-	
 	@Test
 	public void testConstructor() {
 		
@@ -73,5 +76,20 @@ public class SeguroTest {
 		} catch (DatoIncorrectoException e) {
 			// Debe lanzarse la excepcion
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testPrecio() {
+		
+		// Casos de Prueba Validos
+		cliente = new Cliente("Alvaro", "Lopez", true);
+		try {
+			seguro = new Seguro(1, cliente, Cobertura.TERCEROS);
+		} catch (DatoIncorrectoException e) {
+			fail("No deberia lanza la excepcion");
+			e.printStackTrace();
+		}
+		seguro.setFechaUltimoSiniestro(null);
 	}
 }
