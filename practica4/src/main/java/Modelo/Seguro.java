@@ -1,9 +1,17 @@
 package Modelo;
 
 public class Seguro {
-
+	
+	// Atributos de la clase
+	private int potencia;
+	Cliente cliente;
+	Cobertura cobertura;
+	
+	
 	public Seguro(int potencia, Cliente cliente, Cobertura cobertura) {
-		// TODO Auto-generated constructor stub
+		this.potencia = potencia;
+		this.cliente = cliente;
+		this.cobertura = cobertura;
 	}
 
 	public double precio() {
