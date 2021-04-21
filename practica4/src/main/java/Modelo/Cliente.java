@@ -13,4 +13,12 @@ public class Cliente {
 		this.minusvalia = minusvalia;
 	}
 
+	public boolean isMinusvalia() {
+		return minusvalia;
+	}
+
+	public void setMinusvalia(boolean minusvalia) {
+		this.minusvalia = minusvalia;
+	}
+
 }
