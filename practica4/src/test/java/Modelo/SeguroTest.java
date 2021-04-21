@@ -37,20 +37,20 @@ public class SeguroTest {
 		
 		
 		try {
-			seguro = new Seguro(100, clienteSinMinusvalia, Cobertura.TODORIESGO);
+			seguro = new Seguro(100, clienteSinMinusvalia, Cobertura.TODO_RIESGO);
 			assertTrue(seguro.getPotencia() == 100);
 			assertTrue(seguro.getCliente().equals(clienteSinMinusvalia));
-			assertTrue(seguro.getCobertura().equals(Cobertura.TODORIESGO));
+			assertTrue(seguro.getCobertura().equals(Cobertura.TODO_RIESGO));
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
 		}
 		
 		try {
-			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TERCEROS_LUNAS);
 			assertTrue(seguro.getPotencia() == 10000);
 			assertTrue(seguro.getCliente().equals(clienteSinMinusvalia));
-			assertTrue(seguro.getCobertura().equals(Cobertura.TERCEROSLUNAS));
+			assertTrue(seguro.getCobertura().equals(Cobertura.TERCEROS_LUNAS));
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -65,7 +65,7 @@ public class SeguroTest {
 		}
 		
 		try {
-			seguro = new Seguro(100, null, Cobertura.TODORIESGO);
+			seguro = new Seguro(100, null, Cobertura.TODO_RIESGO);
 			fail("Deberia lanzarse la excepcion: Cliente no valido");
 		} catch (DatoIncorrectoException e) {
 			// Debe lanzarse la excepcion
@@ -87,7 +87,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==300);
 		
 		try {
-			seguro = new Seguro(50, clienteSinMinusvalia, Cobertura.TODORIESGO);
+			seguro = new Seguro(50, clienteSinMinusvalia, Cobertura.TODO_RIESGO);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==1000);
 		
 		try {
-			seguro = new Seguro(89, clienteConMinusvalia, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(89, clienteConMinusvalia, Cobertura.TERCEROS_LUNAS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==470);
 		
 		try {
-			seguro = new Seguro(100, clienteConMinusvalia, Cobertura.TODORIESGO);
+			seguro = new Seguro(100, clienteConMinusvalia, Cobertura.TODO_RIESGO);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -122,7 +122,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==825);
 		
 		try {
-			seguro = new Seguro(110, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(110, clienteSinMinusvalia, Cobertura.TERCEROS_LUNAS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -140,7 +140,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==510);
 		
 		try {
-			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TODORIESGO);
+			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TODO_RIESGO);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -149,7 +149,7 @@ public class SeguroTest {
 		assertTrue(seguro.precio()==1400);
 		
 		try {
-			seguro = new Seguro(1, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(1, clienteSinMinusvalia, Cobertura.TERCEROS_LUNAS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
