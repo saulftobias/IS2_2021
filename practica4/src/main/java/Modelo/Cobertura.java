@@ -1,3 +1,3 @@
 package Modelo;
 
-public enum Cobertura {TODORIESGO, TERCEROS, TERCEROSLUNAS}
+public enum Cobertura {TODO_RIESGO, TERCEROS, TERCEROS_LUNAS}

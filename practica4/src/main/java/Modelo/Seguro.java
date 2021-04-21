@@ -8,7 +8,7 @@ public class Seguro {
 	private int potenciaCV;
 	Cliente cliente;
 	Cobertura cobertura;
-	LocalDate fechaUltimoSiniestro;
+	LocalDate fechaUltimoSiniestro = null;
 	
 	public Seguro(int potencia, Cliente cliente, Cobertura cobertura) throws DatoIncorrectoException {
 		
@@ -26,13 +26,13 @@ public class Seguro {
 		//calculo del precio base
 		
 		switch (cobertura) {
-		case TODORIESGO: 
+		case TODO_RIESGO: 
 			precio = 1000;
 			break;
 		case TERCEROS:
 			precio = 400;
 			break;
-		case TERCEROSLUNAS:
+		case TERCEROS_LUNAS:
 			precio = 600;
 			break;
 		default:
@@ -51,7 +51,7 @@ public class Seguro {
 		
 		//calculo a�adido por siniestralidad
 		
-		if (fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(3))) {
+		if (fechaUltimoSiniestro == null || fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(3))) {
 			precio += 0;
 		} else if (fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(1))) {
 			precio += 50;
@@ -73,7 +73,7 @@ public class Seguro {
 	public Cliente getCliente() {
 		return cliente;
 	}
-
+	
 	public Cobertura getCobertura() {
 		return cobertura;
 	}
