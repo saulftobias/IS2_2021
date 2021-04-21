@@ -12,11 +12,13 @@ public class SeguroTest {
 	
 	// Atributos de la clase
 	private Seguro seguro;
-	private Cliente cliente;
+	private Cliente clienteSinMinusvalia;
+	private Cliente clienteConMinusvalia;
 	
 	@Before
 	public void setUp() throws Exception {
-		cliente = new Cliente("Enrique", "Vallejo", false);
+		clienteSinMinusvalia = new Cliente("Enrique", "Vallejo", false);
+		clienteConMinusvalia = new Cliente("Alvaro", "Lopez", true);
 	}
 
 	@Test
@@ -24,9 +26,9 @@ public class SeguroTest {
 		
 		// Casos de Prueba Validos
 		try {
-			seguro = new Seguro(1, cliente, Cobertura.TERCEROS);
+			seguro = new Seguro(1, clienteSinMinusvalia, Cobertura.TERCEROS);
 			assertTrue(seguro.getPotencia() == 1);
-			assertTrue(seguro.getCliente().equals(cliente));
+			assertTrue(seguro.getCliente().equals(clienteSinMinusvalia));
 			assertTrue(seguro.getCobertura().equals(Cobertura.TERCEROS));
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
@@ -35,9 +37,9 @@ public class SeguroTest {
 		
 		
 		try {
-			seguro = new Seguro(100, cliente, Cobertura.TODORIESGO);
+			seguro = new Seguro(100, clienteSinMinusvalia, Cobertura.TODORIESGO);
 			assertTrue(seguro.getPotencia() == 100);
-			assertTrue(seguro.getCliente().equals(cliente));
+			assertTrue(seguro.getCliente().equals(clienteSinMinusvalia));
 			assertTrue(seguro.getCobertura().equals(Cobertura.TODORIESGO));
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
@@ -45,9 +47,9 @@ public class SeguroTest {
 		}
 		
 		try {
-			seguro = new Seguro(10000, cliente, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
 			assertTrue(seguro.getPotencia() == 10000);
-			assertTrue(seguro.getCliente().equals(cliente));
+			assertTrue(seguro.getCliente().equals(clienteSinMinusvalia));
 			assertTrue(seguro.getCobertura().equals(Cobertura.TERCEROSLUNAS));
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
@@ -56,7 +58,7 @@ public class SeguroTest {
 		
 		// Casos de Prueba NO Validos
 		try {
-			seguro = new Seguro(-1, cliente, Cobertura.TERCEROS);
+			seguro = new Seguro(-1, clienteSinMinusvalia, Cobertura.TERCEROS);
 			fail("Deberia lanzarse la excepcion: Potencia no valida");
 		} catch (DatoIncorrectoException e) {
 			// Debe lanzarse la excepcion
@@ -70,8 +72,8 @@ public class SeguroTest {
 		}
 		
 		try {
+			seguro = new Seguro(10000, clienteSinMinusvalia, null);
 			fail("Deberia lanzarse la excepcion: Cobertura no valida");
-			seguro = new Seguro(10000, cliente, null);
 		} catch (DatoIncorrectoException e) {
 			// Debe lanzarse la excepcion
 		}
@@ -81,9 +83,8 @@ public class SeguroTest {
 	public void testPrecio() {
 		
 		// Casos de Prueba Validos
-		cliente = new Cliente("Alvaro", "Lopez", true);
 		try {
-			seguro = new Seguro(1, cliente, Cobertura.TERCEROS);
+			seguro = new Seguro(1, clienteConMinusvalia, Cobertura.TERCEROS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -91,10 +92,8 @@ public class SeguroTest {
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(10));
 		assertTrue(seguro.precio()==300);
 		
-		
-		cliente = new Cliente("Alvaro", "Lopez", false);
 		try {
-			seguro = new Seguro(50, cliente, Cobertura.TODORIESGO);
+			seguro = new Seguro(50, clienteSinMinusvalia, Cobertura.TODORIESGO);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -102,10 +101,8 @@ public class SeguroTest {
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(5));
 		assertTrue(seguro.precio()==1000);
 		
-		
-		cliente = new Cliente("Alvaro", "Lopez", true);
 		try {
-			seguro = new Seguro(89, cliente, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(89, clienteConMinusvalia, Cobertura.TERCEROSLUNAS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -113,10 +110,8 @@ public class SeguroTest {
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(3).minusDays(1));
 		assertTrue(seguro.precio()==450);
 		
-		
-		cliente = new Cliente("Alvaro", "Lopez", false);
 		try {
-			seguro = new Seguro(90, cliente, Cobertura.TERCEROS);
+			seguro = new Seguro(90, clienteSinMinusvalia, Cobertura.TERCEROS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -124,10 +119,8 @@ public class SeguroTest {
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(3));
 		assertTrue(seguro.precio()==470);
 		
-		
-		cliente = new Cliente("Alvaro", "Lopez", true);
 		try {
-			seguro = new Seguro(100, cliente, Cobertura.TODORIESGO);
+			seguro = new Seguro(100, clienteConMinusvalia, Cobertura.TODORIESGO);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
@@ -135,15 +128,40 @@ public class SeguroTest {
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(2));
 		assertTrue(seguro.precio()==825);
 		
-		
-		cliente = new Cliente("Alvaro", "Lopez", false);
 		try {
-			seguro = new Seguro(110, cliente, Cobertura.TERCEROSLUNAS);
+			seguro = new Seguro(110, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
 		} catch (DatoIncorrectoException e) {
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
 		}
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(1).minusDays(1));
-		assertTrue(seguro.precio()==450);
+		assertTrue(seguro.precio()==680);
+		
+		try {
+			seguro = new Seguro(111, clienteConMinusvalia, Cobertura.TERCEROS);
+		} catch (DatoIncorrectoException e) {
+			fail("No deberia lanza la excepcion");
+			e.printStackTrace();
+		}
+		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(1));
+		assertTrue(seguro.precio()==510);
+		
+		try {
+			seguro = new Seguro(10000, clienteSinMinusvalia, Cobertura.TODORIESGO);
+		} catch (DatoIncorrectoException e) {
+			fail("No deberia lanza la excepcion");
+			e.printStackTrace();
+		}
+		seguro.setFechaUltimoSiniestro(LocalDate.now().minusMonths(6));
+		assertTrue(seguro.precio()==1400);
+		
+		try {
+			seguro = new Seguro(1, clienteSinMinusvalia, Cobertura.TERCEROSLUNAS);
+		} catch (DatoIncorrectoException e) {
+			fail("No deberia lanza la excepcion");
+			e.printStackTrace();
+		}
+		seguro.setFechaUltimoSiniestro(LocalDate.now().minusDays(1));
+		assertTrue(seguro.precio()==600);
 	}
 }
