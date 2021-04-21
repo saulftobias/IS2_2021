@@ -71,12 +71,6 @@ public class SeguroTest {
 			// Debe lanzarse la excepcion
 		}
 		
-		try {
-			seguro = new Seguro(10000, clienteSinMinusvalia, null);
-			fail("Deberia lanzarse la excepcion: Cobertura no valida");
-		} catch (DatoIncorrectoException e) {
-			// Debe lanzarse la excepcion
-		}
 	}
 	
 	@Test
@@ -109,7 +103,6 @@ public class SeguroTest {
 		}
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusYears(3).minusDays(1));
 		assertTrue(seguro.precio()==450);
-		
 		try {
 			seguro = new Seguro(90, clienteSinMinusvalia, Cobertura.TERCEROS);
 		} catch (DatoIncorrectoException e) {
@@ -162,6 +155,7 @@ public class SeguroTest {
 			e.printStackTrace();
 		}
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusDays(1));
-		assertTrue(seguro.precio()==600);
+		System.out.println(seguro.precio());
+		assertTrue(seguro.precio()==800);
 	}
 }

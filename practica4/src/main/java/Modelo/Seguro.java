@@ -51,9 +51,9 @@ public class Seguro {
 		
 		//calculo añadido por siniestralidad
 		
-		if (fechaUltimoSiniestro.isBefore((LocalDate.now().minusYears(3)).minusDays(1))) {
+		if (fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(3))) {
 			precio += 0;
-		} else if (fechaUltimoSiniestro.isBefore((LocalDate.now().minusYears(1)).minusDays(1))) {
+		} else if (fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(1))) {
 			precio += 50;
 		} else {
 			precio += 200;
