@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Seguro {
@@ -8,16 +9,8 @@ public class Seguro {
 	private int potenciaCV;
 	Cliente cliente;
 	Cobertura cobertura;
-	Date fechaUltimoSiniestro;
+	LocalDate fechaUltimoSiniestro;
 	
-	public Date getFechaUltimoSiniestro() {
-		return fechaUltimoSiniestro;
-	}
-
-	public void setFechaUltimoSiniestro(Date fechaUltimoSiniestro) {
-		this.fechaUltimoSiniestro = fechaUltimoSiniestro;
-	}
-
 	public Seguro(int potencia, Cliente cliente, Cobertura cobertura) throws DatoIncorrectoException {
 		this.potenciaCV = potencia;
 		this.cliente = cliente;
@@ -52,4 +45,13 @@ public class Seguro {
 	public void setCobertura(Cobertura cobertura) {
 		this.cobertura = cobertura;
 	}
+	
+	public LocalDate getFechaUltimoSiniestro() {
+		return fechaUltimoSiniestro;
+	}
+
+	public void setFechaUltimoSiniestro(LocalDate fechaUltimoSiniestro) {
+		this.fechaUltimoSiniestro = fechaUltimoSiniestro;
+	}
+
 }
