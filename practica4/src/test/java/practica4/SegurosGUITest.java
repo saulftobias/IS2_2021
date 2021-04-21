@@ -20,15 +20,38 @@ public class SegurosGUITest {
 	@Test
 	public void test() {
 		
-		// Casos de Prueba Válidos
-		demo.textBox("Ultimo Siniestro").enterText("21/04/2011");
-		demo.comboBox("Cobertura").selectItem(2); // Seleccionamos "TERCEROS"
-		demo.textBox("Potencia").enterText("1");
-		demo.radioButton("Minusvalía").click();
+		// Casos de Prueba Validos
+		demo.textBox("txtFechaUltimoSiniestro").enterText("21/04/2011");
+		demo.comboBox("comboCobertura").selectItem(2); // Seleccionamos "TERCEROS"
+		demo.textBox("txtPotencia").enterText("1");
+		demo.radioButton("btnMinusvalia").click();
 		
-		demo.button("CALCULAR").click();
+		demo.button("btnCalcular").click();
 		
-		assertTrue(demo.textBox("PRECIO").text()=="300");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		//assertTrue(demo.textBox("txtPrecio").text()=="300");
+		
+		// Casos de Prueba NO Validos
+		demo.textBox("txtFechaUltimoSiniestro").deleteText();
+		demo.comboBox("comboCobertura").selectItem(2); // Seleccionamos "TERCEROS"
+		demo.textBox("txtPotencia").deleteText();
+		demo.textBox("txtPotencia").enterText("-1");
+		demo.radioButton("btnMinusvalia").click();
+		
+		demo.button("btnCalcular").click();
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(demo.textBox("txtPrecio").text()=="¡Dato de entrada erróneo!");
 	}
 
 }

@@ -112,11 +112,12 @@ public class SegurosGUI extends JFrame {
 		btnMinusvalia.setBounds(243, 93, 109, 23);
 		btnMinusvalia.setName("btnMinusvalia");
 		contentPane.add(btnMinusvalia);
-
+		
 		comboCobertura = new JComboBox();
 		comboCobertura.setModel(new DefaultComboBoxModel(new String[] {"TODO_RIESGO", "TERCEROS_LUNAS", "TERCEROS"}));
 		comboCobertura.setBounds(124, 44, 188, 23);
 		contentPane.add(comboCobertura);
+		comboCobertura.setName("comboCobertura"); // Anhadido despues
 
 		JLabel lblCobertura = new JLabel("Cobertura");
 		lblCobertura.setBounds(10, 50, 114, 14);
