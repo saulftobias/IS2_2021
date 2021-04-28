@@ -29,6 +29,7 @@ public class SegurosGUITest {
 		// Casos de Prueba Validos
 		fechaAux = LocalDate.now().minusYears(10);
 		
+		demo.textBox("txtFechaUltimoSiniestro").deleteText();
 		demo.textBox("txtFechaUltimoSiniestro").enterText(fechaAux.format(DateTimeFormatter.ofPattern("dd&MM&yyyy")));
 		demo.comboBox("comboCobertura").selectItem(2); // Seleccionamos "TERCEROS"
 		demo.textBox("txtPotencia").enterText("1");
