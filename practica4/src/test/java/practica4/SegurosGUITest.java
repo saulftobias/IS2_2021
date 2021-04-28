@@ -28,12 +28,10 @@ public class SegurosGUITest {
 		
 		// Casos de Prueba Validos
 		fechaAux = LocalDate.now().minusYears(10);
-		
-		demo.textBox("txtFechaUltimoSiniestro").deleteText();
-		demo.textBox("txtFechaUltimoSiniestro").enterText(fechaAux.format(DateTimeFormatter.ofPattern("dd&MM&yyyy")));
+	
+		demo.textBox("txtFechaUltimoSiniestro").setText(fechaAux.format(DateTimeFormatter.ofPattern("dd" + (char)0x2F + "MM" + (char)0x2F + "yyyy")));
 		demo.comboBox("comboCobertura").selectItem(2); // Seleccionamos "TERCEROS"
-		demo.textBox("txtPotencia").deleteText();
-		demo.textBox("txtPotencia").enterText("1");
+		demo.textBox("txtPotencia").setText("1");
 		demo.radioButton("btnMinusvalia").click();
 		
 		demo.button("btnCalcular").click();
@@ -47,8 +45,7 @@ public class SegurosGUITest {
 		
 		// Casos de Prueba NO Validos
 		demo.comboBox("comboCobertura").selectItem(2); // Seleccionamos "TERCEROS"
-		demo.textBox("txtPotencia").deleteText();
-		demo.textBox("txtPotencia").enterText("/1");
+		demo.textBox("txtPotencia").setText((char)0x2D + "1");
 		
 		demo.button("btnCalcular").click();
 		
@@ -61,10 +58,9 @@ public class SegurosGUITest {
 		
 		fechaAux = LocalDate.now().plusDays(1);
 		
-		demo.textBox("txtFechaUltimoSiniestro").enterText(fechaAux.format(DateTimeFormatter.ofPattern("dd&MM&yyyy")));
+		demo.textBox("txtFechaUltimoSiniestro").setText(fechaAux.format(DateTimeFormatter.ofPattern("dd" + (char)0x2F + "MM" + (char)0x2F + "yyyy")));
 		demo.comboBox("comboCobertura").selectItem(1); // Seleccionamos "TERCEROS"
-		demo.textBox("txtPotencia").deleteText();
-		demo.textBox("txtPotencia").enterText("89");
+		demo.textBox("txtPotencia").setText("89");
 		
 		demo.button("btnCalcular").click();
 		
