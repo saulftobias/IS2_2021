@@ -49,7 +49,7 @@ public class Seguro {
 			precio *= 1.20;
 		}
 		
-		//calculo añadido por siniestralidad
+		//calculo aï¿½adido por siniestralidad
 		
 		if (fechaUltimoSiniestro == null || fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(3))) {
 			precio += 0;
@@ -70,23 +70,12 @@ public class Seguro {
 		return potenciaCV;
 	}
 
-	public void setPotencia(int potencia) {
-		this.potenciaCV = potencia;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
 	public Cobertura getCobertura() {
 		return cobertura;
-	}
-
-	public void setCobertura(Cobertura cobertura) {
-		this.cobertura = cobertura;
-	}
-	
-	public LocalDate getFechaUltimoSiniestro() {
-		return fechaUltimoSiniestro;
 	}
 
 	public void setFechaUltimoSiniestro(LocalDate fechaUltimoSiniestro) {

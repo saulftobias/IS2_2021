@@ -155,7 +155,8 @@ public class SeguroTest {
 			e.printStackTrace();
 		}
 		seguro.setFechaUltimoSiniestro(LocalDate.now().minusDays(1));
-		System.out.println(seguro.precio());
 		assertTrue(seguro.precio()==800);
+		
+		// Casos de Prueba NO Validos ya gestionados en testConstructor()
 	}
 }
