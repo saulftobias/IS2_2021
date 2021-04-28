@@ -114,7 +114,7 @@ public class SeguroTest {
 		
 		try {
 			seguro = new Seguro(100, clienteConMinusvalia, Cobertura.TODO_RIESGO);
-		} catch (DatoIncorrectoException e) {
+		} catch (DatoIncorrectoException e) { 
 			fail("No deberia lanza la excepcion");
 			e.printStackTrace();
 		}
