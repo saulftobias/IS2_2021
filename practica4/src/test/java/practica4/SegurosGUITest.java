@@ -54,6 +54,7 @@ public class SegurosGUITest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 		demo.textBox("txtPrecio").requireText("¡Dato de entrada erróneo!");
 		
 		fechaAux = LocalDate.now().plusDays(1);
