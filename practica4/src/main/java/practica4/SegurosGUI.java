@@ -98,7 +98,7 @@ public class SegurosGUI extends JFrame {
 					txtPrecio.setText(Double.toString(precio));
 
 				} catch (DatoIncorrectoException e) {
-					txtPrecio.setText(Double.toString(precio));
+					txtPrecio.setText("¡Dato de entrada erróneo!");
 
 				} catch (DateTimeParseException e) {
 					txtPrecio.setText("La fecha no se pudo parsear");
