@@ -83,63 +83,48 @@ public class IListaOrdenadaTest {
 
 		// Casos de prueba validos
 
-		listaAux.add(5);
 		lista.add(5);
-		for (int i = 0; i < lista.size(); i++) {
-			assertTrue(lista.get(i)== listaAux.get(i));
-		}
+		assertTrue(lista.get(0) == 5);
 
 		lista.clear();
 
-		listaAux.add(1);
 		lista.add(1);
-		listaAux.add(5);
 		lista.add(5);
-		for (int i = 0; i < lista.size(); i++) {
-			assertTrue(lista.get(i)== listaAux.get(i));
-		}
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 5);
 
 		lista.clear();
 
-		listaAux.add(1);
 		lista.add(1);
-		listaAux.add(3);
 		lista.add(3);
-		listaAux.add(4);
 		lista.add(4);
-		listaAux.add(2);
 		lista.add(2);
-		for (int i = 0; i < lista.size(); i++) {
-			assertTrue(lista.get(i)== listaAux.get(i));
-		}
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 2);
+		assertTrue(lista.get(2) == 3);
+		assertTrue(lista.get(3) == 4);
 
 		lista.clear();
 
-		listaAux.add(2);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
-		listaAux.add(4);
 		lista.add(4);
-		listaAux.add(1);
 		lista.add(1);
-		for (int i = 0; i < lista.size(); i++) {
-			assertTrue(lista.get(i)== listaAux.get(i));
-		}
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 2);
+		assertTrue(lista.get(2) == 3);
+		assertTrue(lista.get(3) == 4);
 
 		lista.clear();
 
-		listaAux.add(1);
 		lista.add(1);
-		listaAux.add(2);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
-		listaAux.add(4);
 		lista.add(4);
-		for (int i = 0; i < lista.size(); i++) {
-			assertTrue(lista.get(i)== listaAux.get(i));
-		}
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 2);
+		assertTrue(lista.get(2) == 3);
+		assertTrue(lista.get(3) == 4);
 
 		lista.clear();
 
