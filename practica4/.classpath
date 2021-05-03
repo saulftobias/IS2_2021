@@ -36,6 +36,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/alvarolopezgarcia/Desktop/Documentos Universidad/3er Curso/2o Cuatrimestre/Ingenieria del Software II/Practicas/practica4/src/ListaOrdenada-0.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saulf/Downloads/ListaOrdenada-0.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
