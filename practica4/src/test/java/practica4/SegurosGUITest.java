@@ -1,11 +1,7 @@
 package practica4;
 
-import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import javax.swing.text.DateFormatter;
 
 import org.fest.swing.fixture.FrameFixture;
 import org.junit.Before;
