@@ -3,6 +3,7 @@ package Modelo;
 public class Seguro {
 	
 	// Atributos de la clase
+	
 	private int potencia;
 	Cliente cliente;
 	Cobertura cobertura;
