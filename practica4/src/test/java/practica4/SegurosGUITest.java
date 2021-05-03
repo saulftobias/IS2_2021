@@ -1,11 +1,7 @@
 package practica4;
 
-import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import javax.swing.text.DateFormatter;
 
 import org.fest.swing.fixture.FrameFixture;
 import org.junit.Before;
@@ -54,7 +50,8 @@ public class SegurosGUITest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		demo.textBox("txtPrecio").requireText("�Dato de entrada err�neo!");
+		
+		demo.textBox("txtPrecio").requireText("¡Dato de entrada erróneo!");
 		
 		fechaAux = LocalDate.now().plusDays(1);
 		
@@ -69,6 +66,6 @@ public class SegurosGUITest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//demo.textBox("txtPrecio").requireText("¡Dato de entrada erróneo!");
+		demo.textBox("txtPrecio").requireText("¡Dato de entrada erróneo!");
 	}
 }
