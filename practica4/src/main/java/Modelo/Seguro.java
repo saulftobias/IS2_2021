@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Seguro {
 	
 	// Atributos de la clase
+	private int potencia;
 	private int potenciaCV;
 	Cliente cliente;
 	Cobertura cobertura;

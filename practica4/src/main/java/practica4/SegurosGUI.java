@@ -88,6 +88,7 @@ public class SegurosGUI extends JFrame {
 				try {
 					if (!txtFechaUltimoSiniestro.getText().equals("dd/mm/yyyy")) {
 						fechaUltimoSiniestro = LocalDate.parse(txtFechaUltimoSiniestro.getText(), formatter);
+						if (fechaUltimoSiniestro.isAfter(LocalDate.now())) throw new DatoIncorrectoException();
 					} 
 					boolean minusvalia = btnMinusvalia.isSelected();
 					int potencia = Integer.parseInt(txtPotencia.getText());
@@ -101,7 +102,7 @@ public class SegurosGUI extends JFrame {
 					txtPrecio.setText("¡Dato de entrada erróneo!");
 
 				} catch (DateTimeParseException e) {
-					txtPrecio.setText("La fecha no se pudo parsear");
+					txtPrecio.setText("¡Dato de entrada erróneo!");
 				}
 
 			}
