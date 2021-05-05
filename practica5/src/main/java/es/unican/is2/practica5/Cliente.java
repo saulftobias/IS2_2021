@@ -15,7 +15,7 @@ public class Cliente {
     private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  
+ 			String telefono, String dni) { // WMC + 1
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -24,19 +24,19 @@ public class Cliente {
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {
+	public void cambiaDireccion(String calle, String zip, String localidad) { // WMC + 1
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public double getSaldoTotal() {
+	public double getSaldoTotal() { // WMC + 1
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {  
-			if (c instanceof CuentaAhorro) {
+		for (Cuenta c: Cuentas) {   // WMC + 1
+			if (c instanceof CuentaAhorro) { // WMC + 1
 				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  {
-				for (Valor v: ((CuentaValores) c).getValores()) {
+			} else if (c instanceof CuentaValores)  { // WMC + 1
+				for (Valor v: ((CuentaValores) c).getValores()) { // WMC + 1
 					total += v.getCotizacionActual()*v.getNumValores();
 				}
 			}
@@ -44,7 +44,7 @@ public class Cliente {
 		return total;
 	}
 	
-	public void anhadeCuenta(Cuenta c) {
+	public void anhadeCuenta(Cuenta c) { // WMC + 1
 		Cuentas.add(c);
 	}
 	

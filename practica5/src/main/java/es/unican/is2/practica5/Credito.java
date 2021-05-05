@@ -13,7 +13,7 @@ public class Credito extends Tarjeta {
 	private List<Movimiento> mhistoricoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, double credito) {
+	public Credito(String numero, String titular, CuentaAhorro c, double credito) { // WMC + 1
 		super(numero, titular, c);
 		mCredito = credito;
 		mMovimientosMensuales = new LinkedList<Movimiento>();
@@ -22,48 +22,48 @@ public class Credito extends Tarjeta {
 
 	/**
 	 * Retirada de dinero en cajero con la tarjeta
-	 * @param x Cantidad a retirar. Se aplica una comisión del 5%.
+	 * @param x Cantidad a retirar. Se aplica una comisiï¿½n del 5%.
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {
-		if (x<0)
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
+		if (x<0) // WMC + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		m.setF(now);
-		m.setC("Retirada en cajero automático");
-		x += x * 0.05; // Añadimos una comisión de un 5%
+		m.setC("Retirada en cajero automï¿½tico");
+		x += x * 0.05; // Aï¿½adimos una comisiï¿½n de un 5%
 		m.setI(-x);
 		
-		if (getGastosAcumulados()+x > mCredito)
-			throw new saldoInsuficienteException("Crédito insuficiente");
+		if (getGastosAcumulados()+x > mCredito) // WMC + 1
+			throw new saldoInsuficienteException("Crï¿½dito insuficiente");
 		else {
 			mMovimientosMensuales.add(m);
 		}
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
-		if (x<0)
+	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
+		if (x<0) // WMC + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		if (getGastosAcumulados() + x > mCredito)
+		if (getGastosAcumulados() + x > mCredito) // WMC + 1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		m.setF(now);
-		m.setC("Compra a crédito en: " + datos);
+		m.setC("Compra a crï¿½dito en: " + datos);
 		m.setI(-x);
 		mMovimientosMensuales.add(m);
 	}
 	
-    public double getGastosAcumulados() {
+    public double getGastosAcumulados() { // WMC + 1
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {
+		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
 			r += m.getI();
 		}
@@ -71,41 +71,41 @@ public class Credito extends Tarjeta {
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {
+	public LocalDate getCaducidadCredito() { // WMC + 1
 		return this.mCuentaAsociada.getCaducidadCredito();
 	}
 
 	/**
-	 * Método que se invoca automáticamente el día 1 de cada mes
+	 * Mï¿½todo que se invoca automï¿½ticamente el dï¿½a 1 de cada mes
 	 */
-	public void liquidar() {
+	public void liquidar() { // WMC + 1
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setF(now);
-		liq.setC("Liquidación de operaciones tarjeta crédito");
+		liq.setC("Liquidaciï¿½n de operaciones tarjeta crï¿½dito");
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {
+		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
 			r += m.getI();
 		}
 		liq.setI(r);
 	
-		if (r != 0)
+		if (r != 0) // WMC + 1
 			mCuentaAsociada.addMovimiento(liq);
 		
 		mhistoricoMovimientos.addAll(mMovimientosMensuales);
 		mMovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosUltimoMes() {
+	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1
 		return mMovimientosMensuales;
 	}
 	
-	public Cuenta getCuentaAsociada() {
+	public Cuenta getCuentaAsociada() { // WMC + 1
 		return mCuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() {
+	public List<Movimiento> getMovimientos() { // WMC + 1
 		return mhistoricoMovimientos;
 	}
 
