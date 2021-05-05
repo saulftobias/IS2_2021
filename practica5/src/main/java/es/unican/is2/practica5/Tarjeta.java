@@ -16,7 +16,7 @@ public abstract class Tarjeta {
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
-	public abstract void retirar(double x) throws saldoInsuficienteException, datoErroneoException; // WMC + 1
+	public abstract void retirar(double x) throws saldoInsuficienteException, datoErroneoException; // WMC + 0 (No se cuenta el metodo abstracto)
 
 	/**
 	 * Pago en establecimiento con la tarjeta
@@ -25,7 +25,7 @@ public abstract class Tarjeta {
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
-	public abstract void pagoEnEstablecimiento(String datos, double x) // WMC + 1
+	public abstract void pagoEnEstablecimiento(String datos, double x) // WMC + 0 (No se cuenta el metodo abstracto)
 			throws saldoInsuficienteException, datoErroneoException;
 	
 }
