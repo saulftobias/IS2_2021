@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Cliente {
 	
+	// WMC = 8
+	// CCog = 8
+	
 	public String nombre;
 	public String calle;
 	public String zip;
@@ -32,11 +35,11 @@ public class Cliente {
 	
 	public double getSaldoTotal() { // WMC + 1
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {   // WMC + 1
-			if (c instanceof CuentaAhorro) { // WMC + 1
+		for (Cuenta c: Cuentas) {   // WMC + 1 CCog + 1
+			if (c instanceof CuentaAhorro) { // WMC + 1 CCog + 2
 				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  { // WMC + 1
-				for (Valor v: ((CuentaValores) c).getValores()) { // WMC + 1
+			} else if (c instanceof CuentaValores)  { // WMC + 1 CCog + 2
+				for (Valor v: ((CuentaValores) c).getValores()) { // WMC + 1 CCog + 3
 					total += v.getCotizacionActual()*v.getNumValores();
 				}
 			}

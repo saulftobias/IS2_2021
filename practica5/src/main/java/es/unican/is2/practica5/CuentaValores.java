@@ -3,7 +3,10 @@ package es.unican.is2.practica5;
 import java.util.List;
 
 public class CuentaValores extends Cuenta {
-
+	
+	// WMC = 3
+	// CCog = 0
+	
 	private List<Valor> valores;
 	
 	public CuentaValores(String numCuenta, List<Valor> valores) { // WMC + 1
