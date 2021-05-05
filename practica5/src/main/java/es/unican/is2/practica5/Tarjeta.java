@@ -1,6 +1,10 @@
 package es.unican.is2.practica5;
 
 public abstract class Tarjeta {
+	
+	// WMC = 1
+	// CCog = 0
+	
 	protected String mNumero, mTitular;		
 	protected CuentaAhorro mCuentaAsociada;
 

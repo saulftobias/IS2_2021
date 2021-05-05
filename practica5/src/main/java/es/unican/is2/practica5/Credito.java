@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Credito extends Tarjeta {
 	
+	// WMC = 16
+	// CCog = 9
+	
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;
 	private List<Movimiento> mhistoricoMovimientos;
@@ -28,7 +31,7 @@ public class Credito extends Tarjeta {
 	 */
 	@Override
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (x<0) // WMC + 1
+		if (x<0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
 		Movimiento m = new Movimiento();
@@ -38,7 +41,7 @@ public class Credito extends Tarjeta {
 		x += x * 0.05; // A�adimos una comisi�n de un 5%
 		m.setI(-x);
 		
-		if (getGastosAcumulados()+x > mCredito) // WMC + 1
+		if (getGastosAcumulados()+x > mCredito) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Cr�dito insuficiente");
 		else {
 			mMovimientosMensuales.add(m);
@@ -47,10 +50,10 @@ public class Credito extends Tarjeta {
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (x<0) // WMC + 1
+		if (x<0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		if (getGastosAcumulados() + x > mCredito) // WMC + 1
+		if (getGastosAcumulados() + x > mCredito) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
@@ -63,7 +66,7 @@ public class Credito extends Tarjeta {
 	
     public double getGastosAcumulados() { // WMC + 1
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1
+		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1 CCog + 1
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
 			r += m.getI();
 		}
@@ -84,28 +87,28 @@ public class Credito extends Tarjeta {
 		liq.setF(now);
 		liq.setC("Liquidaci�n de operaciones tarjeta cr�dito");
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1
+		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC + 1 CCog + 1
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
 			r += m.getI();
 		}
 		liq.setI(r);
 	
-		if (r != 0) // WMC + 1
+		if (r != 0) // WMC + 1 CCog + 1
 			mCuentaAsociada.addMovimiento(liq);
 		
 		mhistoricoMovimientos.addAll(mMovimientosMensuales);
 		mMovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1
+	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1 CCog + 1
 		return mMovimientosMensuales;
 	}
 	
-	public Cuenta getCuentaAsociada() { // WMC + 1
+	public Cuenta getCuentaAsociada() { // WMC + 1 CCog + 1
 		return mCuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() { // WMC + 1
+	public List<Movimiento> getMovimientos() { // WMC + 1 CCog + 1
 		return mhistoricoMovimientos;
 	}
 

@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CuentaAhorro extends Cuenta {
+	
+	// WMC = 18
+	// CCog = 7
 
 	private List<Movimiento> mMovimientos;
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
@@ -21,7 +24,7 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void ingresar(double x) throws datoErroneoException { // WMC + 1
-		if (x <= 0) // WMC + 1
+		if (x <= 0) // WMC + 1  CCog + 1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -32,9 +35,9 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (x <= 0) // WMC + 1
+		if (x <= 0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		if (getSaldo() < x) // WMC + 1
+		if (getSaldo() < x) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -45,7 +48,7 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void ingresar(String concepto, double x) throws datoErroneoException { // WMC + 1
-		if (x <= 0) // WMC + 1
+		if (x <= 0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -56,9 +59,9 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (getSaldo() < x) // WMC + 1
+		if (getSaldo() < x) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Saldo insuficiente");
-		if (x <= 0) // WMC + 1
+		if (x <= 0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -70,7 +73,7 @@ public class CuentaAhorro extends Cuenta {
 
 	public double getSaldo() { // WMC + 1
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientos.size(); i++) { // WMC + 1
+		for (int i = 0; i < this.mMovimientos.size(); i++) { // WMC + 1 CCog + 1
 			Movimiento m = (Movimiento) mMovimientos.get(i);
 			r += m.getI();
 		}

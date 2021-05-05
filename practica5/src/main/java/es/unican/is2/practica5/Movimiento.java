@@ -3,6 +3,10 @@ package es.unican.is2.practica5;
 import java.time.LocalDateTime;
 
 public class Movimiento {
+	
+	// WMC = 6
+	// CCog = 0
+	
 	private String mConcepto;
 	private LocalDateTime mFecha;
 	private double mImporte;

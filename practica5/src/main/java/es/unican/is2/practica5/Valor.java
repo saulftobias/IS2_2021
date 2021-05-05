@@ -2,6 +2,9 @@ package es.unican.is2.practica5;
 
 public class Valor {
 	
+	// WMC = 6
+	// CCog = 0
+	
 	private String entidad;	
 	private int numValores;
 	private double cotizacionActual;
