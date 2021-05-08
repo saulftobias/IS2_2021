@@ -36,7 +36,7 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								practica4.SegurosGUI
+								es.unican.is2.practica4.SegurosGUI
 							</mainClass>
 						</manifest>
 					</archive>
