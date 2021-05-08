@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import java.awt.EventQueue;
 
@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Modelo.Cliente;
-import Modelo.Cobertura;
-import Modelo.DatoIncorrectoException;
-import Modelo.Seguro;
+import es.unican.is2.practica4.Modelo.Cliente;
+import es.unican.is2.practica4.Modelo.Cobertura;
+import es.unican.is2.practica4.Modelo.DatoIncorrectoException;
+import es.unican.is2.practica4.Modelo.Seguro;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;

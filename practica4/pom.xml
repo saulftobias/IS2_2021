@@ -36,11 +36,10 @@
 					<archive>
 						<manifest>
 							<mainClass>
-								practica4.Main
+								practica4.SegurosGUI
 							</mainClass>
 						</manifest>
 					</archive>
-
 				</configuration>
 			</plugin>
 		</plugins>

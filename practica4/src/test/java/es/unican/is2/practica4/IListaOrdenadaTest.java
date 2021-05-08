@@ -1,22 +1,18 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unican.is2.containers.ListaOrdenada;
-
 public class IListaOrdenadaTest {
 
 	private ListaOrdenada<Integer> lista;
-	private ListaOrdenada<Integer> listaAux;
 	private int aux;
 
 	@Before
 	public void setUp() throws Exception {
 		lista = new ListaOrdenada<Integer>();
-		listaAux = new ListaOrdenada<Integer>();
 	}
 
 	@Test
@@ -76,6 +72,7 @@ public class IListaOrdenadaTest {
 		}
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	public void testAdd() {
 
@@ -145,35 +142,31 @@ public class IListaOrdenadaTest {
 
 		// Casos de prueba validos
 
-		listaAux.clear();
 		lista.add(1);
 		lista.remove(0);
-		assertTrue(lista.equals(listaAux));
+		assertTrue(lista.size() == 0);
 
 		lista.clear();
 
-		listaAux.add(1);
 		lista.add(1);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
-		listaAux.add(4);
 		lista.add(4);
 		lista.remove(1);
-		assertTrue(lista.equals(listaAux));
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 3);
+		assertTrue(lista.get(2) == 4);
 
 		lista.clear();
-		listaAux.clear();
 
-		listaAux.add(1);
 		lista.add(1);
-		listaAux.add(2);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
 		lista.add(4);
 		lista.remove(3);
-		assertTrue(lista.equals(listaAux));
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 2);
+		assertTrue(lista.get(2) == 3);
 
 		lista.clear();
 
@@ -230,17 +223,17 @@ public class IListaOrdenadaTest {
 		// Casos de prueba validos
 
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 
 		lista.add(1);
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 
 		lista.add(1);
 		lista.add(2);
 		lista.add(3);
 		lista.add(4);
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 	}
 }

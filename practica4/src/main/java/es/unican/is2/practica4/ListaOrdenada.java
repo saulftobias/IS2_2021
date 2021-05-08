@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class ListaOrdenada<E extends Comparable<E>> implements IListaOrdenada<E>
 
 
 	public E remove(int indice) {
-		E borrado = lista.remove(indice-1);
+		E borrado = lista.remove(indice);
 		return borrado;
 	}
 
@@ -45,6 +45,6 @@ public class ListaOrdenada<E extends Comparable<E>> implements IListaOrdenada<E>
 
 
 	public void clear() {
-		lista.clone();
+		lista.clear();
 	}
 } 
