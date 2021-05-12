@@ -2,18 +2,18 @@ package es.unican.is2.practica5;
 
 public abstract class Cuenta {
 	
-	// WMC = 2
-	// CCog = 0
+	// WMC = 
+	// CCog = 
 	
 	private String numCuenta;
 	
-	public Cuenta(String numCuenta) { // WMC + 1
+	public Cuenta(String numCuenta) {
 		this.numCuenta = numCuenta;
 	}
 	
-	public String getNumCuenta() { // WMC + 1
+	public String getNumCuenta() {
 		return numCuenta;
 	}
 	
-	
+	public abstract double getSaldo();
 }
