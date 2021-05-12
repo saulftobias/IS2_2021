@@ -22,7 +22,7 @@ public class CuentaValores extends Cuenta {
 		valores.add(v);
 	}
 	
-	public double getCotizacionValores() {
+	public double getSaldo() {
 		
 		double total = 0;
 		

@@ -38,12 +38,9 @@ public class Cliente {
 		double total = 0.0;
 		
 		for (Cuenta c: Cuentas) {
-			if (c instanceof CuentaAhorro) {
-				total += ((CuentaAhorro) c).getSaldo();
-			} else {
-				total += ((CuentaValores) c).getCotizacionValores();
-			}
+			total += c.getSaldo();
 		}
+		
 		return total;
 	}
 	
