@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import static org.junit.Assert.*;
 
@@ -8,13 +8,11 @@ import org.junit.Test;
 public class IListaOrdenadaTest {
 
 	private ListaOrdenada<Integer> lista;
-	private ListaOrdenada<Integer> listaAux;
 	private int aux;
 
 	@Before
 	public void setUp() throws Exception {
 		lista = new ListaOrdenada<Integer>();
-		listaAux = new ListaOrdenada<Integer>();
 	}
 
 	@Test
@@ -74,6 +72,7 @@ public class IListaOrdenadaTest {
 		}
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	public void testAdd() {
 
@@ -142,38 +141,51 @@ public class IListaOrdenadaTest {
 		// Metodo remove()
 
 		// Casos de prueba validos
+<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		lista.clear();
 		listaAux.clear();
+=======
+
+>>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 		lista.add(1);
 		System.out.println(lista.size());
 		lista.remove(0);
+<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		System.out.println(lista.size());
 		assertTrue(lista.equals(listaAux));
+=======
+		assertTrue(lista.size() == 0);
+>>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
 
-		listaAux.add(1);
 		lista.add(1);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
-		listaAux.add(4);
 		lista.add(4);
 		lista.remove(1);
+<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		assertTrue(lista == (listaAux));
+=======
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 3);
+		assertTrue(lista.get(2) == 4);
+>>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
-		listaAux.clear();
 
-		listaAux.add(1);
 		lista.add(1);
-		listaAux.add(2);
 		lista.add(2);
-		listaAux.add(3);
 		lista.add(3);
 		lista.add(4);
 		lista.remove(3);
+<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		assertTrue(lista ==(listaAux));
+=======
+		assertTrue(lista.get(0) == 1);
+		assertTrue(lista.get(1) == 2);
+		assertTrue(lista.get(2) == 3);
+>>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
 

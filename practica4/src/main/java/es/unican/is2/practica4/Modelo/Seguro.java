@@ -1,11 +1,10 @@
-package Modelo;
+package es.unican.is2.practica4.Modelo;
 
 import java.time.LocalDate;
 
 public class Seguro {
 	
 	// Atributos de la clase
-	private int potencia;
 	private int potenciaCV;
 	Cliente cliente;
 	Cobertura cobertura;
@@ -50,7 +49,7 @@ public class Seguro {
 			precio *= 1.20;
 		}
 		
-		//calculo a�adido por siniestralidad
+		//calculo anhadido por siniestralidad
 		
 		if (fechaUltimoSiniestro == null || fechaUltimoSiniestro.isBefore(LocalDate.now().minusYears(3))) {
 			precio += 0;

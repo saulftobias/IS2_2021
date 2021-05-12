@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

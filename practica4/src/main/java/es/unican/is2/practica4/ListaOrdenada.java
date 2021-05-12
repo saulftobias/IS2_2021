@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 import java.util.ArrayList;
 
@@ -47,5 +47,5 @@ public class ListaOrdenada<E extends Comparable<E>> implements IListaOrdenada<E>
 	public void clear() {
 		lista.clear();
 	}	
-	
-} 
+
+}

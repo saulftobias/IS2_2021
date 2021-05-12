@@ -1,4 +1,4 @@
-package practica4;
+package es.unican.is2.practica4;
 
 /**
  * TDA ListaOrdenada 
