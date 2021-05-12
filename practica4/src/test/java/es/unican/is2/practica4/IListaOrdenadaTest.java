@@ -141,21 +141,13 @@ public class IListaOrdenadaTest {
 		// Metodo remove()
 
 		// Casos de prueba validos
-<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		lista.clear();
-		listaAux.clear();
-=======
 
->>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 		lista.add(1);
 		System.out.println(lista.size());
 		lista.remove(0);
-<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
 		System.out.println(lista.size());
-		assertTrue(lista.equals(listaAux));
-=======
 		assertTrue(lista.size() == 0);
->>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
 
@@ -164,13 +156,9 @@ public class IListaOrdenadaTest {
 		lista.add(3);
 		lista.add(4);
 		lista.remove(1);
-<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
-		assertTrue(lista == (listaAux));
-=======
 		assertTrue(lista.get(0) == 1);
 		assertTrue(lista.get(1) == 3);
 		assertTrue(lista.get(2) == 4);
->>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
 
@@ -179,13 +167,9 @@ public class IListaOrdenadaTest {
 		lista.add(3);
 		lista.add(4);
 		lista.remove(3);
-<<<<<<< HEAD:practica4/src/test/java/practica4/IListaOrdenadaTest.java
-		assertTrue(lista ==(listaAux));
-=======
 		assertTrue(lista.get(0) == 1);
 		assertTrue(lista.get(1) == 2);
 		assertTrue(lista.get(2) == 3);
->>>>>>> 23c9f9471eb9f04c2da0a8de652772543b48988c:practica4/src/test/java/es/unican/is2/practica4/IListaOrdenadaTest.java
 
 		lista.clear();
 
