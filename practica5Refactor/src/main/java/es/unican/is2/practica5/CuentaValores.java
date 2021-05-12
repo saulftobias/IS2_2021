@@ -22,5 +22,14 @@ public class CuentaValores extends Cuenta {
 		valores.add(v);
 	}
 	
-	
+	public double getCotizacionValores() {
+		
+		double total = 0;
+		
+		for (Valor v: valores) { // WMC + 1 CCog + 3
+			total += v.getCotizacionActual()*v.getNumValores();
+		}
+		
+		return total;
+	}
 }
