@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Cliente {
 	
-	// WMC = 8
-	// CCog = 8
+	// WMC = 
+	// CCog = 
 	
 	public String nombre;
 	public String calle;
@@ -18,7 +18,7 @@ public class Cliente {
     private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) { // WMC + 1
+ 			String telefono, String dni) {
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -27,28 +27,27 @@ public class Cliente {
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) { // WMC + 1
+	public void cambiaDireccion(String calle, String zip, String localidad) {
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public double getSaldoTotal() { // WMC + 1
+	public double getSaldoTotal() {
+		
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {   // WMC + 1 CCog + 1
-			if (c instanceof CuentaAhorro) { // WMC + 1 CCog + 2
+		
+		for (Cuenta c: Cuentas) {
+			if (c instanceof CuentaAhorro) {
 				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  { // WMC + 1 CCog + 2
-				for (Valor v: ((CuentaValores) c).getValores()) { // WMC + 1 CCog + 3
-					total += v.getCotizacionActual()*v.getNumValores();
-				}
+			} else {
+				total += ((CuentaValores) c).getCotizacionValores();
 			}
 		}
 		return total;
 	}
 	
-	public void anhadeCuenta(Cuenta c) { // WMC + 1
+	public void anhadeCuenta(Cuenta c) {
 		Cuentas.add(c);
 	}
-	
 }
