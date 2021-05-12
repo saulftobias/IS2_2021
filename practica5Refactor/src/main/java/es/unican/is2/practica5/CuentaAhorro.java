@@ -10,6 +10,7 @@ public class CuentaAhorro extends Cuenta {
 	// WMC = 
 	// CCog = 
 
+
 	private List<Movimiento> mMovimientos;
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
 	private LocalDate mFechaDeCaducidadTarjetaCredito;
@@ -26,11 +27,8 @@ public class CuentaAhorro extends Cuenta {
 	public void ingresar(double x) throws datoErroneoException {
 		if (x <= 0)
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Ingreso en efectivo");
-		m.setI(x);
+		Movimiento m = new Movimiento("Ingreso en efectivo", now, x);
 		this.mMovimientos.add(m);
 	}
 
@@ -39,11 +37,8 @@ public class CuentaAhorro extends Cuenta {
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		if (getSaldo() < x)
 			throw new saldoInsuficienteException("Saldo insuficiente");
-		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Retirada de efectivo");
-		m.setI(-x);
+		Movimiento m = new Movimiento("Retirada de efectivo", now, -x);
 		this.mMovimientos.add(m);
 	}
 
