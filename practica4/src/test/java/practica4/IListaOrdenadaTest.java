@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unican.is2.containers.ListaOrdenada;
-
 public class IListaOrdenadaTest {
 
 	private ListaOrdenada<Integer> lista;
@@ -25,7 +23,7 @@ public class IListaOrdenadaTest {
 		// Metodo get()
 
 		// Casos de prueba validos
-
+		lista.clear();
 		lista.add(1);
 		aux = lista.get(0);
 		assertTrue(aux == 1);
@@ -144,10 +142,12 @@ public class IListaOrdenadaTest {
 		// Metodo remove()
 
 		// Casos de prueba validos
-
+		lista.clear();
 		listaAux.clear();
 		lista.add(1);
+		System.out.println(lista.size());
 		lista.remove(0);
+		System.out.println(lista.size());
 		assertTrue(lista.equals(listaAux));
 
 		lista.clear();
@@ -160,7 +160,7 @@ public class IListaOrdenadaTest {
 		listaAux.add(4);
 		lista.add(4);
 		lista.remove(1);
-		assertTrue(lista.equals(listaAux));
+		assertTrue(lista == (listaAux));
 
 		lista.clear();
 		listaAux.clear();
@@ -173,7 +173,7 @@ public class IListaOrdenadaTest {
 		lista.add(3);
 		lista.add(4);
 		lista.remove(3);
-		assertTrue(lista.equals(listaAux));
+		assertTrue(lista ==(listaAux));
 
 		lista.clear();
 
@@ -230,17 +230,17 @@ public class IListaOrdenadaTest {
 		// Casos de prueba validos
 
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 
 		lista.add(1);
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 
 		lista.add(1);
 		lista.add(2);
 		lista.add(3);
 		lista.add(4);
 		lista.clear();
-		assertTrue(listaAux.size() == 0);
+		assertTrue(lista.size() == 0);
 	}
 }
