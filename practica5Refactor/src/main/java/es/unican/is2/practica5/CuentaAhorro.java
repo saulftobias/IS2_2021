@@ -10,6 +10,7 @@ public class CuentaAhorro extends Cuenta {
 	// WMC = 
 	// CCog = 
 
+	private static final double LIMITE_DEBITO = 1000;
 
 	private List<Movimiento> mMovimientos;
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
@@ -21,52 +22,40 @@ public class CuentaAhorro extends Cuenta {
 		this.mFechaDeCaducidadTarjetaDebito = date;
 		this.mFechaDeCaducidadTarjetaCredito = date2;
 		mMovimientos = new LinkedList<Movimiento>();
-		limiteDebito = 1000;
+		limiteDebito = LIMITE_DEBITO;
 	}
 
 	public void ingresar(double x) throws datoErroneoException {
-		if (x <= 0)
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento("Ingreso en efectivo", now, x);
-		this.mMovimientos.add(m);
+		ingresar("Ingreso de efectivo", x);
 	}
-
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (x <= 0)
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		if (getSaldo() < x)
-			throw new saldoInsuficienteException("Saldo insuficiente");
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento("Retirada de efectivo", now, -x);
-		this.mMovimientos.add(m);
-	}
-
-	public void ingresar(String concepto, double x) throws datoErroneoException { // WMC + 1
-		if (x <= 0)
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento(concepto, now, x);
-		this.mMovimientos.add(m);
-	}
-
-	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
-		if (getSaldo() < x)
-			throw new saldoInsuficienteException("Saldo insuficiente");
-		if (x <= 0)
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+	
+	public void ingresar(String concepto, double x) throws datoErroneoException {
 		
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento(concepto, now, -x);
-		this.mMovimientos.add(m);
+		if (x <= 0) throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+
+		this.mMovimientos.add(new Movimiento(concepto, LocalDateTime.now(), x));
+	}
+
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {
+		retirar("Retirada de efectivo", x);
+	}
+
+	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException {
+		
+		if (getSaldo() < x) throw new saldoInsuficienteException("Saldo insuficiente");
+		if (x <= 0) throw new datoErroneoException("No se puede retirar una cantidad negativa");
+		
+		this.mMovimientos.add(new Movimiento(concepto, LocalDateTime.now(), -x));
 	}
 
 	public double getSaldo() {
+		
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientos.size(); i++) { // WMC + 1 CCog + 1
-			Movimiento m = (Movimiento) mMovimientos.get(i);
+		
+		for (Movimiento m: mMovimientos) {
 			r += m.getI();
 		}
+		
 		return r;
 	}
 
