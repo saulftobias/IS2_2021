@@ -10,6 +10,14 @@ public class Movimiento {
 	private String mConcepto;
 	private LocalDateTime mFecha;
 	private double mImporte;
+	
+	
+
+	public Movimiento(String mConcepto, LocalDateTime mFecha, double mImporte) {
+		this.mConcepto = mConcepto;
+		this.mFecha = mFecha;
+		this.mImporte = mImporte;
+	}
 
 	public double getI() { // WMC + 1
 		return mImporte;
