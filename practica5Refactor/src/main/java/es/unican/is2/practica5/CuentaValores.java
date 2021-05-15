@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CuentaValores extends Cuenta {
 	
-	// WMC = 3
-	// CCog = 0
+	// WMC
+	// CCog
 	
 	private List<Valor> valores;
 	
@@ -26,7 +26,7 @@ public class CuentaValores extends Cuenta {
 		
 		double total = 0;
 		
-		for (Valor v: valores) { // WMC + 1 CCog + 3
+		for (Valor v: valores) { // WMC CCog
 			total += v.getCotizacionActual()*v.getNumValores();
 		}
 		

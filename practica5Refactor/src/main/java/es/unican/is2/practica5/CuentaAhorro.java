@@ -26,7 +26,7 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void ingresar(double x) throws datoErroneoException {
-		ingresar("Ingreso de efectivo", x);
+		ingresar("Ingreso en efectivo", x);
 	}
 	
 	public void ingresar(String concepto, double x) throws datoErroneoException {
