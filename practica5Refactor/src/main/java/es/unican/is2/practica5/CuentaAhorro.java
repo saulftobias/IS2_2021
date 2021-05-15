@@ -15,18 +15,16 @@ public class CuentaAhorro extends Cuenta {
 	private List<Movimiento> mMovimientos;
 	private LocalDate mFechaDeCaducidadTarjetaDebito;
 	private LocalDate mFechaDeCaducidadTarjetaCredito;
-	private double limiteDebito;
 
 	public CuentaAhorro(String numCuenta, LocalDate date, LocalDate date2) {
 		super(numCuenta);
 		this.mFechaDeCaducidadTarjetaDebito = date;
 		this.mFechaDeCaducidadTarjetaCredito = date2;
 		mMovimientos = new LinkedList<Movimiento>();
-		limiteDebito = LIMITE_DEBITO;
 	}
 
 	public void ingresar(double x) throws datoErroneoException {
-		ingresar("Ingreso de efectivo", x);
+		ingresar("Ingreso en efectivo", x);
 	}
 	
 	public void ingresar(String concepto, double x) throws datoErroneoException {
@@ -76,7 +74,7 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public double getLimiteDebito() {
-		return limiteDebito;
+		return LIMITE_DEBITO;
 	}
 
 }

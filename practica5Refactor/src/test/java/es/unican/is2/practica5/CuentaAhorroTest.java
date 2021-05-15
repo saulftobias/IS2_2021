@@ -14,12 +14,9 @@ public class CuentaAhorroTest {
 	
 	@BeforeClass
 	public static void inicializarMovimientos() {
-		m1 = new Movimiento();
-		m1.setI(100);
-		m2 = new Movimiento();
-		m2.setI(200);
-		m3 = new Movimiento();
-		m3.setI(1500);
+		m1 = new Movimiento("", null, 100);
+		m2 = new Movimiento("", null, 200);
+		m3 = new Movimiento("", null, 1500);
 	}
 
 	@Before
