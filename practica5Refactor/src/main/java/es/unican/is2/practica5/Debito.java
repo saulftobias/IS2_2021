@@ -8,9 +8,10 @@ public class Debito extends Tarjeta {
 	// CCog = 2
 	
 	private double saldoDiarioDisponible;
+	private static final double LIMITE_DEBITO = 1000;
 
-	public Debito(String numero, String titular, CuentaAhorro c) {
-		super(numero, titular, c);
+	public Debito(String numero, String titular, CuentaAhorro c, LocalDate fecha) {
+		super(numero, titular, c, fecha);
 	}
 	
 	@Override
@@ -32,18 +33,21 @@ public class Debito extends Tarjeta {
 	}
 	
 	public LocalDate getCaducidadDebito() { // WMC + 1
-		return this.mCuentaAsociada.getCaducidadDebito();
+		return fechaCaducidad;
 	}
 	
 	/**
 	 * M�todo invocado autom�ticamente a las 00:00 de cada d�a
 	 */
 	public void restableceSaldo() { // WMC + 1
-		saldoDiarioDisponible = mCuentaAsociada.getLimiteDebito();
+		saldoDiarioDisponible = LIMITE_DEBITO;
 	}
 	
 	public CuentaAhorro getCuentaAsociada() { // WMC + 1
 		return mCuentaAsociada;
 	}
-
+	
+	public double getLimiteDebito() {
+		return LIMITE_DEBITO;
+	}
 }

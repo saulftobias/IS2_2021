@@ -16,8 +16,8 @@ public class Credito extends Tarjeta {
 	private List<Movimiento> mhistoricoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, double credito) { // WMC 
-		super(numero, titular, c);
+	public Credito(String numero, String titular, CuentaAhorro c, LocalDate fecha, double credito) { // WMC 
+		super(numero, titular, c, fecha);
 		mCredito = credito;
 		mMovimientosMensuales = new LinkedList<Movimiento>();
 		mhistoricoMovimientos = new LinkedList<Movimiento>();
@@ -64,7 +64,7 @@ public class Credito extends Tarjeta {
 	
 	
 	public LocalDate getCaducidadCredito() { // WMC
-		return this.mCuentaAsociada.getCaducidadCredito();
+		return fechaCaducidad;
 	}
 
 	/**
