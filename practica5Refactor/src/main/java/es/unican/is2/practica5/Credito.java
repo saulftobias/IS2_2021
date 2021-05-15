@@ -16,8 +16,8 @@ public class Credito extends Tarjeta {
 	private List<Movimiento> mhistoricoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, double credito) { // WMC 
-		super(numero, titular, c);
+	public Credito(String numero, String titular, CuentaAhorro c, LocalDate fecha, double credito) { // WMC 
+		super(numero, titular, c, fecha);
 		mCredito = credito;
 		mMovimientosMensuales = new LinkedList<Movimiento>();
 		mhistoricoMovimientos = new LinkedList<Movimiento>();
@@ -64,7 +64,7 @@ public class Credito extends Tarjeta {
 	
 	
 	public LocalDate getCaducidadCredito() { // WMC
-		return this.mCuentaAsociada.getCaducidadCredito();
+		return fechaCaducidad;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Credito extends Tarjeta {
 	public void liquidar() { // WMC
 		LocalDateTime now = LocalDateTime.now();
 		double r = getImporteAcumulado();
-		Movimiento liq = new Movimiento("Liquidaci�n de operaciones tarjeta cr�dito", now, getImporteAcumulado());
+		Movimiento liq = new Movimiento("Liquidaci�n de operaciones tarjeta cr�dito", now, r);
 	
 		if (r != 0) // WMC1 CCog
 			mCuentaAsociada.addMovimiento(liq);
@@ -84,8 +84,7 @@ public class Credito extends Tarjeta {
 
 	private double getImporteAcumulado() {
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) { // WMC1 CCog
-			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
+		for (Movimiento m : mMovimientosMensuales) { // WMC1 CCog
 			r += m.getI();
 		}
 		return r;

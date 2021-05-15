@@ -1,5 +1,7 @@
 package es.unican.is2.practica5;
 
+import java.time.LocalDate;
+
 public abstract class Tarjeta {
 	
 	// WMC = 1
@@ -7,11 +9,13 @@ public abstract class Tarjeta {
 	
 	protected String mNumero, mTitular;		
 	protected CuentaAhorro mCuentaAsociada;
+	protected LocalDate fechaCaducidad;
 
-	public Tarjeta(String numero, String titular, CuentaAhorro c) { // WMC + 1
+	public Tarjeta(String numero, String titular, CuentaAhorro c, LocalDate fecha) { // WMC + 1
 		mNumero = numero;
 		mTitular = titular;
 		mCuentaAsociada = c;
+		fechaCaducidad = fecha;
 	}
 
 	/**

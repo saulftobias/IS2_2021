@@ -1,6 +1,5 @@
 package es.unican.is2.practica5;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,19 +9,10 @@ public class CuentaAhorro extends Cuenta {
 	// WMC = 
 	// CCog = 
 
-	private static final double LIMITE_DEBITO = 1000;
-
 	private List<Movimiento> mMovimientos;
-	private LocalDate mFechaDeCaducidadTarjetaDebito;
-	private LocalDate mFechaDeCaducidadTarjetaCredito;
-	private double limiteDebito;
-
-	public CuentaAhorro(String numCuenta, LocalDate date, LocalDate date2) {
+	public CuentaAhorro(String numCuenta) {
 		super(numCuenta);
-		this.mFechaDeCaducidadTarjetaDebito = date;
-		this.mFechaDeCaducidadTarjetaCredito = date2;
 		mMovimientos = new LinkedList<Movimiento>();
-		limiteDebito = LIMITE_DEBITO;
 	}
 
 	public void ingresar(double x) throws datoErroneoException {
@@ -66,17 +56,4 @@ public class CuentaAhorro extends Cuenta {
 	public List<Movimiento> getMovimientos() {
 		return mMovimientos;
 	}
-
-	public LocalDate getCaducidadDebito() {
-		return this.mFechaDeCaducidadTarjetaDebito;
-	}
-
-	public LocalDate getCaducidadCredito() {
-		return this.mFechaDeCaducidadTarjetaCredito;
-	}
-
-	public double getLimiteDebito() {
-		return limiteDebito;
-	}
-
 }
