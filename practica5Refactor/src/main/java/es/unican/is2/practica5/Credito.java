@@ -8,15 +8,15 @@ import java.util.List;
 
 public class Credito extends Tarjeta {
 	
-	// WMC = 
-	// CCog = 
+	// WMC = 16
+	// CCog = 6
 	
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;
 	private List<Movimiento> mhistoricoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, LocalDate fecha, double credito) { // WMC 
+	public Credito(String numero, String titular, CuentaAhorro c, LocalDate fecha, double credito) { // WMC + 1
 		super(numero, titular, c, fecha);
 		mCredito = credito;
 		mMovimientosMensuales = new LinkedList<Movimiento>();
@@ -30,14 +30,14 @@ public class Credito extends Tarjeta {
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC 
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1 
 		if (x<0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		LocalDateTime now = LocalDateTime.now();
 		x += x * 0.05; // A�adimos una comisi�n de un 5%
 		Movimiento m = new Movimiento("Retirada en cajero autom�tico", now, -x);
 		
-		if (getGastosAcumulados()+x > mCredito)
+		if (getGastosAcumulados()+x > mCredito) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Cr�dito insuficiente");
 		else {
 			mMovimientosMensuales.add(m);
@@ -45,11 +45,11 @@ public class Credito extends Tarjeta {
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { // WMC 
-		if (x<0) // WMC CCog 
+	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException { // WMC + 1
+		if (x<0) // WMC + 1 CCog + 1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		if (getGastosAcumulados() + x > mCredito) // WMC  CCog 
+		if (getGastosAcumulados() + x > mCredito) // WMC + 1 CCog + 1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		
@@ -58,47 +58,47 @@ public class Credito extends Tarjeta {
 		mMovimientosMensuales.add(m);
 	}
 	
-    public double getGastosAcumulados() { // WMC 
+    public double getGastosAcumulados() { // WMC + 1 
 		return - getImporteAcumulado();
 	}
 	
 	
-	public LocalDate getCaducidadCredito() { // WMC
+	public LocalDate getCaducidadCredito() { // WMC + 1
 		return fechaCaducidad;
 	}
 
 	/**
 	 * M�todo que se invoca autom�ticamente el d�a 1 de cada mes
 	 */
-	public void liquidar() { // WMC
+	public void liquidar() { // WMC + 1
 		LocalDateTime now = LocalDateTime.now();
 		double r = getImporteAcumulado();
 		Movimiento liq = new Movimiento("Liquidaci�n de operaciones tarjeta cr�dito", now, r);
 	
-		if (r != 0) // WMC1 CCog
+		if (r != 0) // WMC + 1 CCog + 1
 			mCuentaAsociada.addMovimiento(liq);
 		
 		mhistoricoMovimientos.addAll(mMovimientosMensuales);
 		mMovimientosMensuales.clear();
 	}
 
-	private double getImporteAcumulado() {
+	private double getImporteAcumulado() { // WMC + 1
 		double r = 0.0;
-		for (Movimiento m : mMovimientosMensuales) { // WMC1 CCog
+		for (Movimiento m : mMovimientosMensuales) { // WMC + 1 CCog + 1
 			r += m.getI();
 		}
 		return r;
 	}
 
-	public List<Movimiento> getMovimientosUltimoMes() { // WMC CCog
+	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1
 		return mMovimientosMensuales;
 	}
 	
-	public Cuenta getCuentaAsociada() { // WMC CCog
+	public Cuenta getCuentaAsociada() { // WMC + 1
 		return mCuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() { // WMC CCog
+	public List<Movimiento> getMovimientos() { // WMC + 1
 		return mhistoricoMovimientos;
 	}
 
