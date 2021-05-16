@@ -2,8 +2,8 @@ package es.unican.is2.practica5;
 
 public abstract class Cuenta {
 	
-	// WMC = 
-	// CCog = 
+	// WMC = 2
+	// CCog = 0
 	
 	private String numCuenta;
 	
