@@ -10,7 +10,7 @@ public class Debito extends Tarjeta {
 	private double saldoDiarioDisponible;
 	private static final double LIMITE_DEBITO = 1000;
 
-	public Debito(String numero, String titular, CuentaAhorro c, LocalDate fecha) {
+	public Debito(String numero, String titular, CuentaAhorro c, LocalDate fecha) { // WMC + 1
 		super(numero, titular, c, fecha);
 	}
 	
@@ -47,7 +47,7 @@ public class Debito extends Tarjeta {
 		return mCuentaAsociada;
 	}
 	
-	public double getLimiteDebito() {
+	public double getLimiteDebito() { // WMC + 1
 		return LIMITE_DEBITO;
 	}
 }
