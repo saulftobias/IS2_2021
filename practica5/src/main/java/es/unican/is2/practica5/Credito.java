@@ -9,7 +9,7 @@ import java.util.List;
 public class Credito extends Tarjeta {
 	
 	// WMC = 16
-	// CCog = 9
+	// CCog = 7
 	
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;
@@ -100,15 +100,15 @@ public class Credito extends Tarjeta {
 		mMovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1 CCog + 1
+	public List<Movimiento> getMovimientosUltimoMes() { // WMC + 1
 		return mMovimientosMensuales;
 	}
 	
-	public Cuenta getCuentaAsociada() { // WMC + 1 CCog + 1
+	public Cuenta getCuentaAsociada() { // WMC + 1
 		return mCuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() { // WMC + 1 CCog + 1
+	public List<Movimiento> getMovimientos() { // WMC + 1
 		return mhistoricoMovimientos;
 	}
 
